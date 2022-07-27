@@ -1,0 +1,25 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    username: 'root'
+    password: 'minhmomi2000'
+    url: 'jdbc:mysql://localhost:3306/my_portal'
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: 'update'
+scheduling:
+  cron: '0/5 * * * * *' # cứ 5 phút chạy 1 lần
+jasypt:
+  encryptor:
+    pass: 'minhmomi2000'
+    algorithm: 'PBEWITHHMACSHA512ANDAES_256'
+    pool-size: 4
+    key-obtention-iterations: 1500
+    provider-name: 'SunJCE'
+    salt-generator-classname: 'org.jasypt.salt.RandomSaltGenerator'
+    iv-generator-classname: 'org.jasypt.iv.RandomIvGenerator'
+    string-output-type: 'base64'
+validation:
+  phone-number-regex: '^((\s){0,}(0)(3|8|9))(\d{8}(\s){0,})$' #SĐT 10 kí tự, bắt đầu bằng 03 hoặc 08 hoặc 09
