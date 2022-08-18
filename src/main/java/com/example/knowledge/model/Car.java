@@ -1,23 +1,29 @@
 package com.example.knowledge.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table
+@Table(name = "_car")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Indexed
 public class Car implements Serializable {
 
 	/** The Constant serialVersionUID */
@@ -27,9 +33,11 @@ public class Car implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column
+	@Field
+	@Column(name = "name", length = 255)
 	private String name;
 	
-	@Column
+	@Field
+	@Column(name = "price", length = 255)
 	private int price;
 }

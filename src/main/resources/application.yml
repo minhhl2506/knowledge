@@ -3,12 +3,26 @@ server:
 spring:
   datasource:
     username: 'root'
-    password: 'minhmomi2000'
-    url: 'jdbc:mysql://localhost:3306/my_portal'
+    password: 'root'
+    url: 'jdbc:mysql://mysqldb:3306/my_portal'
   jpa:
     show-sql: false
     hibernate:
       ddl-auto: 'update'
+  properties:
+    hibernate.search.default.directory_provider: filesystem
+    hibernate.search.default.indexBase: 'indexes'
+  messages:
+    encoding: 'UTF-8'
+    use-code-as-default-message: true
+    basename: 'messages' 
+    cache-duration: 60    # 60 second, see the ISO 8601 standard
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/changelog-master.xml
+  redis:
+    host: 127.0.0.1
+    port: 6379
 scheduling:
   cron: '0/5 * * * * *' # cứ 5 phút chạy 1 lần
 jasypt:

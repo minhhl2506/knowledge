@@ -1,0 +1,36 @@
+version: '3'
+services:
+  mysqldb:
+    container_name: mysqldb
+    image: mysql:5.7
+    restart: always
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: my_portal
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql
+  knowledge:
+    links:
+      - redis-server
+    image: knowledge
+    depends_on:
+     - mysqldb
+    build: .
+    environment:
+      DATABASE_HOST: mysqldb
+      DATABASE_USER: root
+      DATABASE_PASSWORD: root
+      DATABASE_NAME: my_portal  
+      DATABASE_PORT: 3306
+    ports:
+      - 8080:8080 
+  redis-server:
+    hostname: redis
+    image: 'redis:latest'
+    ports:
+      - "6379:6379"
+
+volumes:
+  db_data: {}

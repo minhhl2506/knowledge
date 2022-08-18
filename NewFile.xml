@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <telegram>
+	<to>Sarah Bellum</to>
+	<from>Colonel Timeslip</from>
+	<subject>Robo-sitting instructions</subject>
+	<graphic></graphic>
+	<message>
+		Thanks for watching my robot pal
+		<name>Zonky</name>
+		while I'm away. He needs to be recharged
+		<emphasis>Twice a day</emphasis>
+		and if he starts to get cranky, give him a quart of oil.
+		I'll be back
+		soon, after having tracked down that evil mastermind.
+		<vilain>DR. Indigo Riceway</vilain>
+	</message>
+</telegram> -->
+<sinhvien>
+	<masv></masv>
+	<tensv></tensv>
+	<danhsachmonhoc>
+		<monhoc>
+			<mamonmoc></mamonmoc>
+			<tenmonhoc></tenmonhoc>
+			<sotinchi></sotinchi>
+			<diem></diem>
+		</monhoc>
+	</danhsachmonhoc>
+</sinhvien>
