@@ -24,8 +24,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Indexed
-@Document(indexName = "blog")
 public class Car implements Serializable {
 
 	/** The Constant serialVersionUID */
