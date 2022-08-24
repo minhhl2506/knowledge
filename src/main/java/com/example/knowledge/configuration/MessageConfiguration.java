@@ -21,7 +21,7 @@ public class MessageConfiguration {
 
 	private String encoding;
 
-	private String[] basenames;
+	private String[] basename;
 
 	private int cacheDuration;
 

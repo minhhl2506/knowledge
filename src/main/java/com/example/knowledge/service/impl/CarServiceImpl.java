@@ -45,15 +45,6 @@ public class CarServiceImpl implements CarService {
 		return null;
 	}
 
-//	@Override
-//	public String getValue() {
-//
-//		System.out.println(this.propertiesConfiguration.getAlgorithm() + " "
-//				+ this.propertiesConfiguration.getIvGeneratorClassname() + " "
-//				+ this.propertiesConfiguration.getKeyObtentionIterations());
-//		return this.propertiesConfiguration.getPass();
-//	}
-
 	@Override
 	public List<CarDTO> findAll1() {
 
@@ -75,6 +66,15 @@ public class CarServiceImpl implements CarService {
 		List<Car> cars = this.carRepository.findAll();
 
 		return this.carMapper.toDto(cars);
+	}
+	
+	@Override
+	public CarDTO create(CarDTO carDto) {
+		Car car = this.carMapper.toEntity(carDto);
+		
+		car = this.carRepository.save(car);
+		
+		return this.carMapper.toDto(car);
 	}
 
 	@Override

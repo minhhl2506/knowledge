@@ -15,7 +15,7 @@ spring:
   messages:
     encoding: 'UTF-8'
     use-code-as-default-message: true
-    basename: 'messages' 
+    basename: 'i18n/messages' 
     cache-duration: 60    # 60 second, see the ISO 8601 standard
   liquibase:
     enabled: true

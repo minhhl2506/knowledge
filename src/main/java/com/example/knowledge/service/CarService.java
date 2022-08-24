@@ -1,6 +1,7 @@
 package com.example.knowledge.service;
 
 import java.util.List;
+
 import com.example.knowledge.model.Car;
 import com.example.knowledge.model.dto.CarDTO;
 
@@ -19,5 +20,7 @@ public interface CarService {
 	CarDTO detail(Long id);
 
 	List<CarDTO> search(String keyword);
+
+	CarDTO create(CarDTO carDto);
 
 }

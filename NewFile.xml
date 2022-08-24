@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- <telegram>
-	<to>Sarah Bellum</to>
-	<from>Colonel Timeslip</from>
-	<subject>Robo-sitting instructions</subject>
-	<graphic></graphic>
-	<message>
-		Thanks for watching my robot pal
-		<name>Zonky</name>
-		while I'm away. He needs to be recharged
-		<emphasis>Twice a day</emphasis>
-		and if he starts to get cranky, give him a quart of oil.
-		I'll be back
-		soon, after having tracked down that evil mastermind.
-		<vilain>DR. Indigo Riceway</vilain>
-	</message>
-</telegram> -->
-<sinhvien>
+<!-- <telegram> <to>Sarah Bellum</to> <from>Colonel Timeslip</from> <subject>Robo-sitting 
+	instructions</subject> <graphic></graphic> <message> Thanks for watching 
+	my robot pal <name>Zonky</name> while I'm away. He needs to be recharged 
+	<emphasis>Twice a day</emphasis> and if he starts to get cranky, give him 
+	a quart of oil. I'll be back soon, after having tracked down that evil mastermind. 
+	<vilain>DR. Indigo Riceway</vilain> </message> </telegram> -->
+<!-- <sinhvien>
 	<masv></masv>
 	<tensv></tensv>
+	<lop></lop>
 	<danhsachmonhoc>
 		<monhoc>
 			<mamonmoc></mamonmoc>
@@ -26,4 +17,91 @@
 			<diem></diem>
 		</monhoc>
 	</danhsachmonhoc>
-</sinhvien>
+</sinhvien> -->
+<dscongnhan>
+	<congnhan>
+		<macongnhan>1</macongnhan>
+		<ten>Long</ten>
+		<tuoi>22</tuoi>
+		<danhsachcongviec>
+			<congviec>
+				<ten>Xay nha</ten>
+				<songaycong>22</songaycong>
+				<luong>5000000</luong>
+			</congviec>
+			<congviec>
+				<ten>Quet voi</ten>
+				<songaycong>22</songaycong>
+				<luong>5000000</luong>
+			</congviec>
+		</danhsachcongviec>
+	</congnhan>
+	<congnhan>
+		<macongnhan>2</macongnhan>
+		<ten>Long</ten>
+		<tuoi>22</tuoi>
+		<danhsachcongviec>
+			<congviec>
+				<ten>Xay nha</ten>
+				<songaycong>22</songaycong>
+				<luong>5000000</luong>
+			</congviec>
+			<congviec>
+				<ten>Quet voi</ten>
+				<songaycong>22</songaycong>
+				<luong>5000000</luong>
+			</congviec>
+		</danhsachcongviec>
+	</congnhan>
+	<congnhan>
+		<macongnhan>3</macongnhan>
+		<ten>Long</ten>
+		<tuoi>22</tuoi>
+		<danhsachcongviec>
+			<congviec>
+				<ten>Xay nha</ten>
+				<songaycong>22</songaycong>
+				<luong>5000000</luong>
+			</congviec>
+			<congviec>
+				<ten>Quet voi</ten>
+				<songaycong>22</songaycong>
+				<luong>5000000</luong>
+			</congviec>
+		</danhsachcongviec>
+	</congnhan>
+	<congnhan>
+		<macongnhan>4</macongnhan>
+		<ten>Long</ten>
+		<tuoi>22</tuoi>
+		<danhsachcongviec>
+			<congviec>
+				<ten>Quet voi</ten>
+				<songaycong>22</songaycong>
+				<luong>5000000</luong>
+			</congviec>
+			<congviec>
+				<ten>Xay nha</ten>
+				<songaycong>22</songaycong>
+				<luong>5000000</luong>
+			</congviec>
+		</danhsachcongviec>
+	</congnhan>
+	<congnhan>
+		<macongnhan>5</macongnhan>
+		<ten>Long</ten>
+		<tuoi>22</tuoi>
+		<danhsachcongviec>
+			<congviec>
+				<ten>Xay nha</ten>
+				<songaycong>22</songaycong>
+				<luong>5000000</luong>
+			</congviec>
+			<congviec>
+				<ten>Quet voi</ten>
+				<songaycong>22</songaycong>
+				<luong>5000000</luong>
+			</congviec>
+		</danhsachcongviec>
+	</congnhan>
+</dscongnhan>

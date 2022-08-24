@@ -2,6 +2,12 @@ package com.example.knowledge.model.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.example.knowledge.label.LabelKey;
+import com.example.knowledge.util.ValidateConstraint;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
@@ -19,8 +25,12 @@ public class CarDTO implements Serializable {
 
 	private long carId;
 	
+	@NotBlank(message = LabelKey.ERROR_CAR_NAME_IS_REQUIRED)
+	@Size(max = ValidateConstraint.LENGTH.CAR_NAME_MAX_LENGTH,
+			message = LabelKey.ERROR_CAR_NAME_MAX_LENGTH_IS_INVALID)
 	private String carName;
 	
+	@NotNull(message = LabelKey.ERROR_CAR_PRICE_IS_REQUIRED)
 	private int carPrice;
 	
 }
