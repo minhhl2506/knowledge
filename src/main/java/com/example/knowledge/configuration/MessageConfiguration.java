@@ -41,7 +41,7 @@ public class MessageConfiguration {
 	public MessageSource getMessageResource() {
 		ReloadableResourceBundleMessageSource messageResource = new ReloadableResourceBundleMessageSource();
 
-		messageResource.setBasenames(this.basenames);
+		messageResource.setBasenames(this.basename);
 		messageResource.setDefaultEncoding(this.encoding);
 		messageResource.setCacheSeconds(this.cacheDuration);
 		messageResource.setUseCodeAsDefaultMessage(this.useCodeAsDefaultMessage);

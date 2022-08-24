@@ -1,4 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- <!DOCTYPE contacts [
+	<!ELEMENT contacts(contact*)>
+	<!ELEMENT contact(name, location, phone, knows, description)>
+	<!ELEMENT name(first, middle, last)>
+	<!ELEMENT first (#PCDATA)>
+	<!ELEMENT middle (#PCDATA)>
+	<!ELEMENT last (#PCDATA)>
+	<!ELEMENT location(latitude, longtitude)>
+	<!ELEMENT latitude (#PCDATA)>
+	<!ELEMENT longtitude (#PCDATA)>
+	<!ELEMENT phone (#PCDATA)>
+	<!ELEMENT knows (#PCDATA)>
+	<!ELEMENT description (#PCDATA|em|strong|br)*>
+	<!ELEMENT em (#PCDATA)>
+	<!ELEMENT br (#PCDATA)>
+	<!ELEMENT strong (#PCDATA)>
+]>
+<contacts>
+	<contact>
+		<name>
+			<first>Joseph</first>
+			<middle>John</middle>
+			<last>Fawcett</last>
+		</name>
+		<location>
+			<latitude>50.7218</latitude>
+			<longitude>-3.533617</longitude>
+		</location>
+		<phone>001-234-567-8910</phone>
+		<knows>John Doe, Danny Ayers</knows>
+		<description>Joseph is a developer and author for Beginning XML <em>5th
+		edition</em>.<br/>Joseph <strong>loves</strong> XML!</description>
+	</contact>
+</contacts> -->
+
 <!-- <telegram> <to>Sarah Bellum</to> <from>Colonel Timeslip</from> <subject>Robo-sitting 
 	instructions</subject> <graphic></graphic> <message> Thanks for watching 
 	my robot pal <name>Zonky</name> while I'm away. He needs to be recharged 
@@ -18,7 +53,7 @@
 		</monhoc>
 	</danhsachmonhoc>
 </sinhvien> -->
-<dscongnhan>
+<!-- <dscongnhan>
 	<congnhan>
 		<macongnhan>1</macongnhan>
 		<ten>Long</ten>
@@ -104,4 +139,4 @@
 			</congviec>
 		</danhsachcongviec>
 	</congnhan>
-</dscongnhan>
+</dscongnhan> -->

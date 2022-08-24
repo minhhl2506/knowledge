@@ -67,7 +67,7 @@ public class CarController {
 	
 	@GetMapping("/locale")
 	public String locale(@RequestHeader(name="Accept-Language", required=false) Locale locale) {
-		return messageSource.getMessage(MessageCode.MSG1002.getKey(), null, locale); 
+		return messageSource.getMessage(MessageCode.MSG1003.getKey(), null, locale); 
 	}
 	
 	@GetMapping("/search")
