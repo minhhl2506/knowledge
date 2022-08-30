@@ -66,8 +66,16 @@ public class CarController {
 	}
 	
 	@GetMapping("/locale")
-	public String locale(@RequestHeader(name="Accept-Language", required=false) Locale locale) {
-		return messageSource.getMessage(MessageCode.MSG1003.getKey(), null, locale); 
+	public String locale() {
+//		String[] languages = Locale.getISOLanguages();
+//		String[] countries = Locale.getISOCountries();
+//		for(String language: languages) {
+//			System.out.println(language);
+//		}
+//		for(String country: countries) {
+//			System.out.println(country);
+//		}
+		return this.carService.getMessage(); 
 	}
 	
 	@GetMapping("/search")

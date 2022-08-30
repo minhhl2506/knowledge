@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.example.knowledge.advice.BadRequestAlertException;
 import com.example.knowledge.configuration.RsaProvider;
 import com.example.knowledge.configuration.ValidationProperties;
+import com.example.knowledge.label.LabelKey;
+import com.example.knowledge.label.Labels;
 import com.example.knowledge.message.MessageCode;
 import com.example.knowledge.model.Car;
 import com.example.knowledge.model.dto.CarDTO;
@@ -43,6 +45,11 @@ public class CarServiceImpl implements CarService {
 	public List<CarDTO> search(String keyword) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public String getMessage() {
+		return Labels.getLabels(LabelKey.ERROR_CAR_NAME_IS_REQUIRED);
 	}
 
 	@Override

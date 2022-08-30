@@ -1,38 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- <!DOCTYPE contacts [
-	<!ELEMENT contacts(contact*)>
-	<!ELEMENT contact(name, location, phone, knows, description)>
-	<!ELEMENT name(first, middle, last)>
-	<!ELEMENT first (#PCDATA)>
-	<!ELEMENT middle (#PCDATA)>
-	<!ELEMENT last (#PCDATA)>
-	<!ELEMENT location(latitude, longtitude)>
-	<!ELEMENT latitude (#PCDATA)>
-	<!ELEMENT longtitude (#PCDATA)>
-	<!ELEMENT phone (#PCDATA)>
-	<!ELEMENT knows (#PCDATA)>
-	<!ELEMENT description (#PCDATA|em|strong|br)*>
-	<!ELEMENT em (#PCDATA)>
-	<!ELEMENT br (#PCDATA)>
-	<!ELEMENT strong (#PCDATA)>
+<!-- <!DOCTYPE danhsachdonhang [
+	<!ELEMENT danhsachdonhang(donhang*)>
+	<!ELEMENT donhang(makh, tenkh, diachilienlac, danhsachmathang)>
+	<!ELEMENT makh (#PCDATA)>
+	<!ELEMENT tenkh (#PCDATA)>
+	<!ELEMENT diachilienlac (#PCDATA)>
+	<!ELEMENT danhsachmathang(mathang*)>
+	<!ATTLIST mathang
+			mamathang ID #REQUIRED>
+	<!ELEMENT mathang(ten, soluong, dongia)>
+	<!ELEMENT ten (#PCDATA)>
+	<!ELEMENT soluong (#PCDATA)>
+	<!ELEMENT dongia (#PCDATA)>
 ]>
-<contacts>
-	<contact>
-		<name>
-			<first>Joseph</first>
-			<middle>John</middle>
-			<last>Fawcett</last>
-		</name>
-		<location>
-			<latitude>50.7218</latitude>
-			<longitude>-3.533617</longitude>
-		</location>
-		<phone>001-234-567-8910</phone>
-		<knows>John Doe, Danny Ayers</knows>
-		<description>Joseph is a developer and author for Beginning XML <em>5th
-		edition</em>.<br/>Joseph <strong>loves</strong> XML!</description>
-	</contact>
-</contacts> -->
+<danhsachdonhang>
+	<donhang>
+		<makh></makh>
+		<tenkh></tenkh>
+		<diachilienlac></diachilienlac>
+		<danhsachmathang>
+			<mathang mamathang="1">
+				<ten></ten>
+				<soluong></soluong>
+				<dongia></dongia>
+			</mathang>
+		</danhsachmathang>
+	</donhang>
+</danhsachdonhang> -->
+<!-- <!DOCTYPE contacts [ <!ELEMENT contacts(contact*)> <!ELEMENT contact(name, 
+	location, phone, knows, description)> <!ELEMENT name(first, middle, last)> 
+	<!ELEMENT first (#PCDATA)> <!ELEMENT middle (#PCDATA)> <!ELEMENT last (#PCDATA)> 
+	<!ELEMENT location(latitude, longtitude)> <!ELEMENT latitude (#PCDATA)> <!ELEMENT 
+	longtitude (#PCDATA)> <!ELEMENT phone (#PCDATA)> <!ELEMENT knows (#PCDATA)> 
+	<!ELEMENT description (#PCDATA|em|strong|br)*> <!ELEMENT em (#PCDATA)> <!ELEMENT 
+	br (#PCDATA)> <!ELEMENT strong (#PCDATA)> ]> <contacts> <contact> <name> 
+	<first>Joseph</first> <middle>John</middle> <last>Fawcett</last> </name> 
+	<location> <latitude>50.7218</latitude> <longitude>-3.533617</longitude> 
+	</location> <phone>001-234-567-8910</phone> <knows>John Doe, Danny Ayers</knows> 
+	<description>Joseph is a developer and author for Beginning XML <em>5th edition</em>.<br/>Joseph 
+	<strong>loves</strong> XML!</description> </contact> </contacts> -->
 
 <!-- <telegram> <to>Sarah Bellum</to> <from>Colonel Timeslip</from> <subject>Robo-sitting 
 	instructions</subject> <graphic></graphic> <message> Thanks for watching 
@@ -40,103 +46,47 @@
 	<emphasis>Twice a day</emphasis> and if he starts to get cranky, give him 
 	a quart of oil. I'll be back soon, after having tracked down that evil mastermind. 
 	<vilain>DR. Indigo Riceway</vilain> </message> </telegram> -->
-<!-- <sinhvien>
-	<masv></masv>
-	<tensv></tensv>
-	<lop></lop>
-	<danhsachmonhoc>
-		<monhoc>
-			<mamonmoc></mamonmoc>
-			<tenmonhoc></tenmonhoc>
-			<sotinchi></sotinchi>
-			<diem></diem>
-		</monhoc>
-	</danhsachmonhoc>
-</sinhvien> -->
-<!-- <dscongnhan>
-	<congnhan>
-		<macongnhan>1</macongnhan>
-		<ten>Long</ten>
-		<tuoi>22</tuoi>
-		<danhsachcongviec>
-			<congviec>
-				<ten>Xay nha</ten>
-				<songaycong>22</songaycong>
-				<luong>5000000</luong>
-			</congviec>
-			<congviec>
-				<ten>Quet voi</ten>
-				<songaycong>22</songaycong>
-				<luong>5000000</luong>
-			</congviec>
-		</danhsachcongviec>
-	</congnhan>
-	<congnhan>
-		<macongnhan>2</macongnhan>
-		<ten>Long</ten>
-		<tuoi>22</tuoi>
-		<danhsachcongviec>
-			<congviec>
-				<ten>Xay nha</ten>
-				<songaycong>22</songaycong>
-				<luong>5000000</luong>
-			</congviec>
-			<congviec>
-				<ten>Quet voi</ten>
-				<songaycong>22</songaycong>
-				<luong>5000000</luong>
-			</congviec>
-		</danhsachcongviec>
-	</congnhan>
-	<congnhan>
-		<macongnhan>3</macongnhan>
-		<ten>Long</ten>
-		<tuoi>22</tuoi>
-		<danhsachcongviec>
-			<congviec>
-				<ten>Xay nha</ten>
-				<songaycong>22</songaycong>
-				<luong>5000000</luong>
-			</congviec>
-			<congviec>
-				<ten>Quet voi</ten>
-				<songaycong>22</songaycong>
-				<luong>5000000</luong>
-			</congviec>
-		</danhsachcongviec>
-	</congnhan>
-	<congnhan>
-		<macongnhan>4</macongnhan>
-		<ten>Long</ten>
-		<tuoi>22</tuoi>
-		<danhsachcongviec>
-			<congviec>
-				<ten>Quet voi</ten>
-				<songaycong>22</songaycong>
-				<luong>5000000</luong>
-			</congviec>
-			<congviec>
-				<ten>Xay nha</ten>
-				<songaycong>22</songaycong>
-				<luong>5000000</luong>
-			</congviec>
-		</danhsachcongviec>
-	</congnhan>
-	<congnhan>
-		<macongnhan>5</macongnhan>
-		<ten>Long</ten>
-		<tuoi>22</tuoi>
-		<danhsachcongviec>
-			<congviec>
-				<ten>Xay nha</ten>
-				<songaycong>22</songaycong>
-				<luong>5000000</luong>
-			</congviec>
-			<congviec>
-				<ten>Quet voi</ten>
-				<songaycong>22</songaycong>
-				<luong>5000000</luong>
-			</congviec>
-		</danhsachcongviec>
-	</congnhan>
-</dscongnhan> -->
+<!-- <sinhvien> <masv></masv> <tensv></tensv> <lop></lop> <danhsachmonhoc> 
+	<monhoc> <mamonmoc></mamonmoc> <tenmonhoc></tenmonhoc> <sotinchi></sotinchi> 
+	<diem></diem> </monhoc> </danhsachmonhoc> </sinhvien> -->
+<!-- <dscongnhan> <congnhan> <macongnhan>1</macongnhan> <ten>Long</ten> <tuoi>22</tuoi> 
+	<danhsachcongviec> <congviec> <ten>Xay nha</ten> <songaycong>22</songaycong> 
+	<luong>5000000</luong> </congviec> <congviec> <ten>Quet voi</ten> <songaycong>22</songaycong> 
+	<luong>5000000</luong> </congviec> </danhsachcongviec> </congnhan> <congnhan> 
+	<macongnhan>2</macongnhan> <ten>Long</ten> <tuoi>22</tuoi> <danhsachcongviec> 
+	<congviec> <ten>Xay nha</ten> <songaycong>22</songaycong> <luong>5000000</luong> 
+	</congviec> <congviec> <ten>Quet voi</ten> <songaycong>22</songaycong> <luong>5000000</luong> 
+	</congviec> </danhsachcongviec> </congnhan> <congnhan> <macongnhan>3</macongnhan> 
+	<ten>Long</ten> <tuoi>22</tuoi> <danhsachcongviec> <congviec> <ten>Xay nha</ten> 
+	<songaycong>22</songaycong> <luong>5000000</luong> </congviec> <congviec> 
+	<ten>Quet voi</ten> <songaycong>22</songaycong> <luong>5000000</luong> </congviec> 
+	</danhsachcongviec> </congnhan> <congnhan> <macongnhan>4</macongnhan> <ten>Long</ten> 
+	<tuoi>22</tuoi> <danhsachcongviec> <congviec> <ten>Quet voi</ten> <songaycong>22</songaycong> 
+	<luong>5000000</luong> </congviec> <congviec> <ten>Xay nha</ten> <songaycong>22</songaycong> 
+	<luong>5000000</luong> </congviec> </danhsachcongviec> </congnhan> <congnhan> 
+	<macongnhan>5</macongnhan> <ten>Long</ten> <tuoi>22</tuoi> <danhsachcongviec> 
+	<congviec> <ten>Xay nha</ten> <songaycong>22</songaycong> <luong>5000000</luong> 
+	</congviec> <congviec> <ten>Quet voi</ten> <songaycong>22</songaycong> <luong>5000000</luong> 
+	</congviec> </danhsachcongviec> </congnhan> </dscongnhan> -->
+
+<!-- <!DOCTYPE danhsachsinhvien [ <!ELEMENT danhsachsinhvien(sinhvien*)> 
+	<!ELEMENT sinhvien(masv, ten, danhsachmonhoc)> <!ELEMENT masv (#PCDATA)> 
+	<!ELEMENT ten (#PCDATA)> <!ELEMENT danhsachmonhoc(monhoc*)> <!ELEMENT monhoc(ma, 
+	ten, diemthi)> <!ELEMENT ma (#PCDATA)> <!ELEMENT ten (#PCDATA)> <!ELEMENT 
+	diemthi (#PCDATA)> ]> <danhsachsinhvien> <sinhvien> <masv></masv> <ten></ten> 
+	<danhsachmonhoc> <monhoc> <ma></ma> <ten></ten> <diemthi></diemthi> </monhoc> 
+	</danhsachmonhoc> </sinhvien> </danhsachsinhvien> -->
+<!-- <!DOCTYPE danhsachmonhoc [
+	<!ELEMENT danhsachmonhoc(monhoc*)>
+	<!ELEMENT monhoc(ma, ten, sotinchi)>
+	<!ELEMENT ma (#PCDATA)>
+	<!ELEMENT ten (#PCDATA)>
+	<!ELEMENT sotinchi (#PCDATA)>
+]>
+<danhsachmonhoc>
+	<monhoc>
+		<ma></ma>
+		<ten></ten>
+		<sotinchi></sotinchi>
+	</monhoc>
+</danhsachmonhoc> -->

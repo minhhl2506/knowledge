@@ -22,5 +22,7 @@ public interface CarService {
 	List<CarDTO> search(String keyword);
 
 	CarDTO create(CarDTO carDto);
+	
+	String getMessage();
 
 }
