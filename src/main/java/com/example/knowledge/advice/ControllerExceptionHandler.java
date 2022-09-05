@@ -24,12 +24,19 @@ public class ControllerExceptionHandler {
 	}
 	
 	@ExceptionHandler(value = MethodArgumentNotValidException.class)
-	public Map<String, String> handleInvalidArgument(MethodArgumentNotValidException ex) {
-        Map<String, String> errorMap = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error -> { 
+	public ResponseEntity<ErrorMessage> handleInvalidArgument(MethodArgumentNotValidException ex) {
+        
+		Map<String, String> errorMap = new HashMap<>();
+        
+		ex.getBindingResult().getFieldErrors().forEach(error -> { 
             errorMap.put(error.getField(), error.getDefaultMessage());
         });
-        return errorMap;
+		
+		ErrorMessage errorMessage = new ErrorMessage(HttpStatus.BAD_REQUEST.value(), new Date(),
+				null, errorMap);
+		
+		return new ResponseEntity<ErrorMessage>(errorMessage, HttpStatus.BAD_REQUEST);
+        
     }
 
 }

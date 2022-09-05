@@ -1,7 +1,6 @@
 package com.example.knowledge.exception;
 import java.util.Date;
-
-import com.example.knowledge.message.MessageCode;
+import java.util.Map;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +14,16 @@ public class ErrorMessage {
 	private Date timestamp;
 	
 	private String message;
+	
+	
+	private Map<String, String> listErrors;
+	
+	public ErrorMessage(int statusCode, Date timestamp, String message, Map<String, String> listErrors) {
+		this.statusCode = statusCode;
+		this.timestamp = timestamp;
+		this.message = message;
+		this.listErrors = listErrors;
+	}
 	
 	public ErrorMessage(int statusCode, Date timestamp, String message) {
 		this.statusCode = statusCode;
