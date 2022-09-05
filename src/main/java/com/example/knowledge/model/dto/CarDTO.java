@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_DEFAULT) //Chỉ cho những thuộc tính k có giá trị default vào response
+@JsonInclude(JsonInclude.Include.NON_NULL) //Chỉ cho những thuộc tính k có giá trị default vào response
 public class CarDTO implements Serializable {	
 	
 	/** The Constant serialVersionUID */
@@ -31,6 +31,6 @@ public class CarDTO implements Serializable {
 	private String carName;
 	
 	@NotNull(message = LabelKey.ERROR_CAR_PRICE_IS_REQUIRED)
-	private int carPrice;
+	private Integer carPrice;
 	
 }

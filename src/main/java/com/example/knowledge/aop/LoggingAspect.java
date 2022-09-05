@@ -1,5 +1,7 @@
 package com.example.knowledge.aop;
 
+import java.time.Instant;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -35,6 +37,8 @@ public class LoggingAspect {
 	@Around("@annotation(inboundRequestLog)")
 	public Object saveInboundLog(final ProceedingJoinPoint joinPoint, InboundRequestLog inboundRequestLog) throws Throwable {
 		
+		log.info("save inbound req log is called!");
+		
 		ObjectMapper mapper = new ObjectMapper();
 		
         InboundReqLog reqLog = new InboundReqLog();
@@ -45,7 +49,11 @@ public class LoggingAspect {
         
         reqLog.setMethod(request.getMethod());
         
-//        reqLog.setRequestData(gson.toJson(request));
+        reqLog.setRequestTime(Instant.now());
+        
+        reqLog.setServiceName(joinPoint.getSignature().getName());
+        
+//        reqLog.setRequestData(gson.fromJson(request.getReader().lines().collect(Collectors.joining()), String.class));
         
         reqLog.setResponseData(mapper.writeValueAsString(joinPoint.proceed()));
         
@@ -53,5 +61,7 @@ public class LoggingAspect {
 		
 		return joinPoint.proceed();
 	}
+	
+	
 
 }

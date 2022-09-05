@@ -55,4 +55,28 @@
 			ALTER TABLE _outbound_req_log add request_data VARCHAR(5000)
 		</sql>
 	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-07">
+		<sql>
+			ALTER TABLE _inbound_req_log add request_time TIMESTAMP
+		</sql>
+	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-08">
+		<sql>
+			ALTER TABLE _outbound_req_log add request_time TIMESTAMP
+		</sql>
+	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-09">
+		<sql>
+			ALTER TABLE _inbound_req_log add service_name VARCHAR(500)
+		</sql>
+	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-10">
+		<sql>
+			ALTER TABLE _outbound_req_log add service_name VARCHAR(500)
+		</sql>
+	</changeSet>
 </databaseChangeLog>

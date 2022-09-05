@@ -1,6 +1,7 @@
 package com.example.knowledge.model;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
@@ -33,4 +34,10 @@ public class RequestLogEntity implements Serializable {
 	
 	@Column(name = "response_data", length = 5000)
 	private String responseData;
+	
+	@Column(name = "request_time")
+	private Instant requestTime;
+	
+	@Column(name = "service_name", length = 500)
+	private String serviceName;
 }

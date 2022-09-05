@@ -38,8 +38,9 @@ public class CarController {
 //		return this.carService.findAll();
 //	}  
 	
+	@InboundRequestLog
 	@PostMapping("/create")
-	public ResponseEntity<CarDTO> create(@Valid @RequestBody CarDTO carDto) {
+	public ResponseEntity<CarDTO> create(HttpServletRequest request, @Valid @RequestBody CarDTO carDto) {
 		return ResponseEntity.ok().body(this.carService.create(carDto));
 	}
 

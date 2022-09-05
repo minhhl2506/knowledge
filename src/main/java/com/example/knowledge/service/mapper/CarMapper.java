@@ -9,7 +9,7 @@ import com.example.knowledge.model.dto.CarDTO;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CarMapper extends EntityMapper<CarDTO, Car> {
 	
-	@Mapping(target = "carId", ignore = true) // Không map id từ Car sang CarDTO
+//	@Mapping(target = "carId", ignore = true) // Không map id từ Car sang CarDTO
 	@Mapping(source = "name", target = "carName") // Map thuộc tính "name" trong Car sang "carName" trong CarDTO
 	@Mapping(source = "price", target = "carPrice") // Map thuộc tính "price" trong Car sang "carPrice" trong CarDTO
 	public CarDTO toDto(Car car);
