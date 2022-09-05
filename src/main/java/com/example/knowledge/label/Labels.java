@@ -46,8 +46,14 @@ public class Labels {
 		Labels.messageSource = messageSource;
 	}
 
+	// get message with none value of object
 	public static String getLabels(String key) {
 		return getLabels(key, null, getLocale());
+	}
+	
+	// get message with value of object
+	public static String getLabels(String key, Object[] objs) {
+		return getLabels(key, objs, getLocale());
 	}
 	
 	public static Locale getLocale() {

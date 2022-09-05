@@ -30,12 +30,10 @@ public class Car implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@Field
+
 	@Column(name = "name", length = 255)
 	private String name;
-	
-	@Field
+
 	@Column(name = "price", length = 255)
 	private int price;
 }

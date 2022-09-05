@@ -1,24 +1,21 @@
 package com.example.knowledge.controller;
 
 import java.util.List;
-import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.knowledge.message.MessageCode;
+import com.example.knowledge.annotation.InboundRequestLog;
 import com.example.knowledge.model.dto.CarDTO;
 import com.example.knowledge.service.CarService;
 
@@ -39,19 +36,16 @@ public class CarController {
 //	@GetMapping("/findAll")
 //	public List<Car> findAll() {
 //		return this.carService.findAll();
-//	}
-	
-	@Autowired   
-	private MessageSource messageSource;  
+//	}  
 	
 	@PostMapping("/create")
 	public ResponseEntity<CarDTO> create(@Valid @RequestBody CarDTO carDto) {
 		return ResponseEntity.ok().body(this.carService.create(carDto));
 	}
 
-	
-	@GetMapping("/findAll1")
-	public ResponseEntity<List<CarDTO>> findAll1() {
+	@InboundRequestLog
+	@GetMapping("/findAll")
+	public ResponseEntity<List<CarDTO>> findAll1(HttpServletRequest request) {
 		return ResponseEntity.ok(this.carService.findAll1());
 	}
 	
@@ -67,14 +61,6 @@ public class CarController {
 	
 	@GetMapping("/locale")
 	public String locale() {
-//		String[] languages = Locale.getISOLanguages();
-//		String[] countries = Locale.getISOCountries();
-//		for(String language: languages) {
-//			System.out.println(language);
-//		}
-//		for(String country: countries) {
-//			System.out.println(country);
-//		}
 		return this.carService.getMessage(); 
 	}
 	

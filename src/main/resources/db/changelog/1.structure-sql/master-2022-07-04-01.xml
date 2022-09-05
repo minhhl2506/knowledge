@@ -16,5 +16,43 @@
 			);
 		</sql>
 	</changeSet>
+	
+		<changeSet author="MinhHL" id="s-2022-07-04-01-02">
+		<sql>
+			CREATE TABLE _inbound_req_log (
+			id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+			request_uri VARCHAR(255),
+			method VARCHAR(255)
+			);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-03">
+		<sql>
+			CREATE TABLE _outbound_req_log (
+			id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+			request_uri VARCHAR(255),
+			method VARCHAR(255)
+			);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-04">
+		<sql>
+			ALTER TABLE _inbound_req_log add response_data VARCHAR(255)
+		</sql>
+	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-05">
+		<sql>
+			ALTER TABLE _outbound_req_log add response_data VARCHAR(255)
+		</sql>
+	</changeSet>
 
+
+	<changeSet author="MinhHL" id="s-2022-07-04-01-06">
+		<sql>
+			ALTER TABLE _outbound_req_log add request_data VARCHAR(5000)
+		</sql>
+	</changeSet>
 </databaseChangeLog>
