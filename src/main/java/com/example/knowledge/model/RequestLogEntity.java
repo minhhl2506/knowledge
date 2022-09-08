@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=false)
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class RequestLogEntity implements Serializable {
+public abstract class RequestLogEntity implements Serializable {
 	
 	/**
 	 * 

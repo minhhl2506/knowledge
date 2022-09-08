@@ -32,8 +32,7 @@ public class ControllerExceptionHandler {
             errorMap.put(error.getField(), error.getDefaultMessage());
         });
 		
-		ErrorMessage errorMessage = new ErrorMessage(HttpStatus.BAD_REQUEST.value(), new Date(),
-				null, errorMap);
+		ErrorMessage errorMessage = new ErrorMessage(HttpStatus.BAD_REQUEST.value(), new Date(), errorMap);
 		
 		return new ResponseEntity<ErrorMessage>(errorMessage, HttpStatus.BAD_REQUEST);
         

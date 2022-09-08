@@ -18,10 +18,9 @@ public class ErrorMessage {
 	
 	private Map<String, String> listErrors;
 	
-	public ErrorMessage(int statusCode, Date timestamp, String message, Map<String, String> listErrors) {
+	public ErrorMessage(int statusCode, Date timestamp, Map<String, String> listErrors) {
 		this.statusCode = statusCode;
 		this.timestamp = timestamp;
-		this.message = message;
 		this.listErrors = listErrors;
 	}
 	
