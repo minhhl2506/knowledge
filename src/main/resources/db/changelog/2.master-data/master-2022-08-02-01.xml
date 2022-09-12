@@ -11,5 +11,19 @@
 			TRUNCATE TABLE _car;
 		</sql>
 	</changeSet>
+	
+	<changeSet author="MinhHL" id="m-2022-08-02-01-02">
+		<sql>
+			INSERT INTO _user
+			VALUES(1, 'minh', 'minhmomi2000');
+		</sql>
+	</changeSet>
+	
+	<changeSet author="MinhHL" id="m-2022-08-02-01-03">
+		<sql>
+			UPDATE _user
+			SET password = '$2a$12$xAYskJQrhuFXtC4M6AF.VO8om0Y7pHbeZg80u2kaTTbwBKmueJTx6' where id = 1;
+		</sql>
+	</changeSet>
 
 </databaseChangeLog>

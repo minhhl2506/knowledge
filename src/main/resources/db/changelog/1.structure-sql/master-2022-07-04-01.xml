@@ -79,4 +79,14 @@
 			ALTER TABLE _outbound_req_log add service_name VARCHAR(500)
 		</sql>
 	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-11">
+		<sql>
+			CREATE TABLE _user (
+			id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+			username VARCHAR(255) UNIQUE NOT NULL,
+			password VARCHAR(255) NOT NULL
+			);
+		</sql>
+	</changeSet>
 </databaseChangeLog>

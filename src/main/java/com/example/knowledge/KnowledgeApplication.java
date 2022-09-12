@@ -42,3 +42,14 @@ public class KnowledgeApplication {
 	}
 
 }
+/*
+ * <dependency> <groupId>org.springframework.boot</groupId>
+ * <artifactId>spring-boot-starter-security</artifactId> </dependency>
+ * 
+ * <dependency> <groupId>org.springframework.security</groupId>
+ * <artifactId>spring-security-test</artifactId> <scope>test</scope>
+ * </dependency>
+ * 
+ * <dependency> <groupId>io.jsonwebtoken</groupId> <artifactId>jjwt</artifactId>
+ * <version>${jwt.version}</version> </dependency>
+ */

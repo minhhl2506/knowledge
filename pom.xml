@@ -24,6 +24,7 @@
 		<hibernate.search.version>5.11.1.Final</hibernate.search.version>
 		<jpamodelgen.version>5.4.12.Final</jpamodelgen.version>
 		<lombok.mapstruct.version>0.2.0</lombok.mapstruct.version>
+		<jwt.version>0.9.1</jwt.version>
 	</properties>
 
 	<dependencies>
