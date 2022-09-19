@@ -32,8 +32,11 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
+
 scheduling:
-  cron: '0/5 * * * * *' # cứ 5 phút chạy 1 lần
+  cache:
+    cron: '0 */5 * * * *' # cứ 5 phut chạy 1 lần
+
 jasypt:
   encryptor:
     pass: 'minhmomi2000'
@@ -46,3 +49,18 @@ jasypt:
     string-output-type: 'base64'
 validation:
   phone-number-regex: '^((\s){0,}(0)(3|8|9))(\d{8}(\s){0,})$' #SĐT 10 kí tự, bắt đầu bằng 03 hoặc 08 hoặc 09
+
+rsa:
+  private-key: MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAIYBQbu81zoNWdIXCWOidfimLkbGo2hPc2NeTmPEQgmoVsrQyhmpCB2ivkyy4l5pQkTrbePPwUm6XuQzKs72RonI9PaWgYT3xktT6N511GB3I+zqXlGUROrWQbSDFtXVoipvzJuXFWIgsAJAW+aGAi21/bKeTbP/8T0yUkolIaiHAgMBAAECgYAebnyiCNGLwmpqdobQVJ2b2QlbU1Lapmha4ZjFuVUR4mPLbTzoNOW97S5wNpOHwzmkcx6ihJStjKBuDFylYXJFFfJsgzQQ6PSSX+XWdTjxph7Qv8+1NCOSj7/1nsmxjMeqILHbPd/jQKi5sbYx2hy0X+V5iBDA60jwSeI2l3dQGQJBAL3ilkERyO80ZiULWgPjWJb7FApVqy29upQAJHlS7PKXvg/bqQ3pSwJfA+kgGxAiBQfCUb78hc1wTjdR8lqGbzUCQQC0qcmOwcNpijfOy4TokZpOIjoik3F55mrfq06X4+6OFQVItAGFutZ8SO/83MAerM5ZQy4jRc+b9uMQN/HvAURLAkBPFjC+qUmnV4uzoia7t9UODUUriMLjKkKroeOPJJrL76eZs0OWJ7S2KBzY3CZpccHmmWiywzp3dm8dW2Q1kAiBAkBA1BBkrrkNfTCrfzJxNhZV5UhRMfFtWbaODm3EaWEoEPj1bsqBD1t5+75KUXiLSV0+gLHkrF9kSwKNxlWFe0HjAkEAhKqvrY7k8OJObUVSjlH44jmxeXxDW/Ld5sLKalnpHz6bxFJK8HCt+JDdHOf+qz5287YNGklBHF3yIxo1foQ4Fg==
+  public-key: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCGAUG7vNc6DVnSFwljonX4pi5GxqNoT3NjXk5jxEIJqFbK0MoZqQgdor5MsuJeaUJE623jz8FJul7kMyrO9kaJyPT2loGE98ZLU+jeddRgdyPs6l5RlETq1kG0gxbV1aIqb8yblxViILACQFvmhgIttf2ynk2z//E9MlJKJSGohwIDAQAB
+cache:
+  time-to-live:
+    token: 300 #giay
+  
+  
+  
+  
+  
+  
+  
+  

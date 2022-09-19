@@ -15,7 +15,7 @@ public interface CarService {
 
 	List<CarDTO> findAll1();
 
-	String checkRegexPhoneNumber(String phoneNumber);
+//	String checkRegexPhoneNumber(String phoneNumber);
 
 	CarDTO detail(Long id);
 

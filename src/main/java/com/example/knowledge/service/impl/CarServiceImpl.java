@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.knowledge.advice.BadRequestAlertException;
 import com.example.knowledge.configuration.RsaProvider;
-import com.example.knowledge.configuration.ValidationProperties;
 import com.example.knowledge.label.LabelKey;
 import com.example.knowledge.label.Labels;
 import com.example.knowledge.message.MessageCode;
@@ -39,7 +38,7 @@ public class CarServiceImpl implements CarService {
 
 	private final RsaProvider rsaProvider;
 	
-	private final ValidationProperties validationProperties;
+//	private final ValidationProperties validationProperties;
 	
 	@Override
 	public List<CarDTO> search(String keyword) {
@@ -109,13 +108,13 @@ public class CarServiceImpl implements CarService {
 		return this.carMapper.toEntity(carDtos);
 	}
 	
-	@Override
-	public String checkRegexPhoneNumber(String phoneNumber) {
-		if(!this.validationProperties.isPhoneNumberValid(phoneNumber)) {
-			return "SĐT không hợp lệ";
-		}
-		
-		return phoneNumber;
-	}
+//	@Override
+//	public String checkRegexPhoneNumber(String phoneNumber) {
+//		if(!this.validationProperties.isPhoneNumberValid(phoneNumber)) {
+//			return "SĐT không hợp lệ";
+//		}
+//		
+//		return phoneNumber;
+//	}
 
 }

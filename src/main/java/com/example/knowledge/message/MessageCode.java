@@ -12,9 +12,20 @@ import lombok.NoArgsConstructor;
 public enum MessageCode {
 	
 	MSG1001("Id cannot be null"),
+	
 	MSG1002(LabelKey.ERROR_CAR_NOT_FOUND),
+	
 	MSG1003(LabelKey.ERROR_CAR_NAME_MAX_LENGTH_IS_INVALID),
-	MSG1004(LabelKey.ERROR_CAR_NAME_IS_REQUIRED);
+	
+	MSG1004(LabelKey.ERROR_CAR_NAME_IS_REQUIRED), 
+	
+	MSG1005(LabelKey.ERROR_USERNAME_IS_REQUIRED), 
+	
+	MSG1006(LabelKey.ERROR_PASSWORD_IS_REQUIRED), 
+	
+	MSG1007(LabelKey.USER_DOESNT_EXIST),
+	
+	;
 	
 	private String key;
 }

@@ -55,10 +55,10 @@ public class CarController {
 		return ResponseEntity.ok(this.carService.detail(id));
 	}
 
-	@GetMapping("/checkRegexPhoneNumber")
-	public String checkRegexPhoneNumber(@RequestParam(name = "phoneNumber") String phoneNumber) {
-		return this.carService.checkRegexPhoneNumber(phoneNumber);
-	}
+//	@GetMapping("/checkRegexPhoneNumber")
+//	public String checkRegexPhoneNumber(@RequestParam(name = "phoneNumber") String phoneNumber) {
+//		return this.carService.checkRegexPhoneNumber(phoneNumber);
+//	}
 	
 	@GetMapping("/locale")
 	public String locale() {

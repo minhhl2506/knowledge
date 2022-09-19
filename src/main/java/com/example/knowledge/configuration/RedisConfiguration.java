@@ -1,21 +1,33 @@
-//package com.example.knowledge.configuration;
-//
-//import org.springframework.cache.annotation.EnableCaching;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.data.redis.connection.RedisConnectionFactory;
-//import org.springframework.data.redis.core.RedisTemplate;
-//import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
-//
-//@Configuration
-//@EnableCaching
-//@EnableRedisRepositories
-//public class RedisConfiguration {
-//
-//	@Bean
-//	public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory connectionFactory) {
-//		RedisTemplate<String, String> template = new RedisTemplate<>();
-//		// Add some specific configuration here. Key serializers, etc.
-//		return template;
-//	}
-//}
+package com.example.knowledge.configuration;
+
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
+import org.springframework.scheduling.annotation.Scheduled;
+
+import com.example.knowledge.cache.util.CacheConstants;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Configuration
+@EnableRedisRepositories
+@RequiredArgsConstructor
+@Slf4j
+public class RedisConfiguration {
+
+	private final CacheManager cacheManager;
+
+	@Scheduled(cron = "${scheduling.cache.cron}")
+	@CacheEvict(cacheNames = CacheConstants.Car.FIND_CAR_BY_ID, allEntries = true)
+	public void refreshCache() {
+		
+		log.info("Clear cache function is called!");
+		
+        cacheManager.getCacheNames().stream()
+           .forEach(cache -> cacheManager.getCache(cache).clear());
+
+     }
+
+}
