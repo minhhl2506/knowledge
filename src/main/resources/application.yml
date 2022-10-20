@@ -56,7 +56,10 @@ rsa:
 cache:
   time-to-live:
     token: 300 #giay
-  
+security:
+  authentication:
+    jwt:
+      secret-key: aPdSgVkYp3s6v9y$B?E(H+MbQeThWmZq4t7w!z%C*F)J@NcRfUjXn2r5u8x/A?D(
   
   
   

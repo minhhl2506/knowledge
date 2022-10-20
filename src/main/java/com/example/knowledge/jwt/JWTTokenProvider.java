@@ -1,37 +1,70 @@
 package com.example.knowledge.jwt;
 
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.example.knowledge.configuration.AuthenticationProperties;
+import com.example.knowledge.configuration.TokenProperties;
+import com.example.knowledge.response.TokenResponse;
+import com.example.knowledge.util.DateUtils;
+import com.example.knowledge.util.SecurityConstants;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 
 @Component
+@RequiredArgsConstructor
 public class JWTTokenProvider {
-	
-//	@Autowired
-//    private UserRepository userRepo;
+      
+    private final TokenProperties tokenProperties;
+    
+    private final AuthenticationProperties properties;
+    
+	private Key getSigningKey() {
+		byte[] keyBytes;
+		
+		String secretKey = this.properties.getSecretKey();
+		
+		keyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
+		
+		return Keys.hmacShaKeyFor(keyBytes);
+	}
 
-    static final long EXPIRATIONTIME = 864_000_000; // 10 days
-    static final String SECRET = "ThisIsASecret";
-    static final String HEADER_STRING = "Authorization";
-
-    public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-        return addAuthentication(claims, userDetails.getUsername());
+    public ResponseEntity<TokenResponse> createToken(UserDetails userDetails) {
+    	
+    	Map<String, Object> claims = new HashMap<>();
+    	
+    	return generateToken(claims, userDetails.getUsername());
     }
 
-    public String addAuthentication(Map<String, Object> claims, String username) {
-        String JWT = Jwts.builder().setClaims(claims).setSubject(username)
-                        .setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
-                        .signWith(SignatureAlgorithm.HS512, SECRET).compact();
-        return (JWT);
+    public ResponseEntity<TokenResponse> generateToken(Map<String, Object> claims, String username) {
+        
+    	Date expiration = DateUtils.getDateAfterSecond(new Date(), this.tokenProperties.getToken());
+    	
+    	String jwtToken = Jwts.builder()
+        				 .setClaims(claims)
+        				 .setSubject(username)
+                         .setExpiration(expiration)
+                         .signWith(getSigningKey()).compact();
+        
+        TokenResponse tokenResponse = TokenResponse.builder()
+        											.token(jwtToken)
+        											.type(SecurityConstants.TokenType.TOKEN)
+        											.duration(this.tokenProperties.getToken())
+        											.build();
+        
+        return new ResponseEntity<>(tokenResponse, HttpStatus.OK);
     }
 
     public String getUsernameFromToken(String token) {
@@ -40,11 +73,12 @@ public class JWTTokenProvider {
 
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
+        
         return claimsResolver.apply(claims);
     }
 
     public Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody();
+        return Jwts.parser().setSigningKey(getSigningKey()).parseClaimsJws(token).getBody();
     }
 	
 }

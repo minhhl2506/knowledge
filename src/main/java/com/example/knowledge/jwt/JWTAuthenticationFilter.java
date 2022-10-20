@@ -18,9 +18,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.example.knowledge.service.UserService;
 
+import lombok.RequiredArgsConstructor;
+
 @Component
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
-
+	
 	@Autowired
 	private UserService customUserService;
 

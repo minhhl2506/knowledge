@@ -42,7 +42,86 @@ public class CarServiceImpl implements CarService {
 	
 	@Override
 	public List<CarDTO> search(String keyword) {
-		// TODO Auto-generated method stub
+//		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
+//
+//        QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder()
+//                .forEntity(Car.class)
+//                .overridesForField(Car.FieldName.POSITION_NAME, Constants.AnalyzerDefName.EDGE_NGRAM_QUERY)
+//                .overridesForField(Position.FieldName.POSITION_SHORT_NAME, Constants.AnalyzerDefName.EDGE_NGRAM_QUERY)
+//                .overridesForField(Position.FieldName.POSITION_CODE, Constants.AnalyzerDefName.EDGE_NGRAM_QUERY)
+//                .get();
+//
+//        BooleanJunction<?> mustJunc = queryBuilder.bool();
+//
+////        mustJunc = mustJunc.must(queryBuilder.keyword().onField(Position.FieldName.STATUS)
+////                        .matching(EntityStatus.DELETED.getStatus()).createQuery()).not();
+////
+////        if (Validator.isNotNull(params.getStatus())) {
+////            mustJunc = mustJunc
+////                            .must(queryBuilder.keyword().onField(Position.FieldName.STATUS).matching(params.getStatus())
+////                                            .createQuery());
+////        }
+//
+//        if (!Validator.isNull(keyword)) {
+//            mustJunc = mustJunc.must(queryBuilder.keyword().wildcard()
+//                            .onField(Position.FieldName.POSITION_CODE)
+//                            .matching(QueryUtil.getFullWildcardParam(params.getPositionCode()))
+//                            .createQuery());
+//        }
+//
+//        if (Validator.isNotNull(params.getPositionName())) {
+//            mustJunc = mustJunc.must(queryBuilder.keyword().onField(Position.FieldName.POSITION_NAME)
+//                            .matching(params.getPositionName().toLowerCase())
+//                            .createQuery());
+//        }
+//
+//        if (Validator.isNotNull(params.getShortName())) {
+//            mustJunc = mustJunc.must(queryBuilder.keyword().onField(Position.FieldName.POSITION_SHORT_NAME)
+//                            .matching(params.getShortName().toLowerCase())
+//                            .createQuery());
+//        }
+//
+//        if (Validator.isNull(keyword)) {
+//            BooleanJunction<?> shouldJunc = queryBuilder.bool();
+//
+//            shouldJunc = shouldJunc
+//                            .should(queryBuilder
+//                                            .keyword()
+//                                            .onFields(Position.FieldName.POSITION_NAME,
+//                                                            Position.FieldName.POSITION_SHORT_NAME)
+//                                            .matching(keyword.toLowerCase()).createQuery())
+//                            .should(queryBuilder
+//                                            .keyword()
+//                                            .wildcard()
+//                                            .onFields(Position.FieldName.POSITION_CODE)
+//                                            .matching(QueryUtil.getFullWildcardParam(keyword)).createQuery());
+//
+//            mustJunc = mustJunc.must(shouldJunc.createQuery());
+//        }
+//
+//        org.apache.lucene.search.Query query = mustJunc.createQuery();
+//
+//        FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, Position.class);
+//
+//        Sort sort = queryBuilder.sort()
+//                .byScore().desc()
+//                .andByField(Position.SortName.POSITION_ID_SORT).desc()
+//                .createSort();
+//
+//        jpaQuery.setSort(sort);
+//
+//        int count = jpaQuery.getResultSize();
+//
+////        if (pageable != null) {
+////            jpaQuery.setFirstResult(pageable.getPageNumber() * pageable.getPageSize());
+////            jpaQuery.setMaxResults(pageable.getPageSize());
+////        } else {
+////            jpaQuery.setFirstResult(QueryUtil.FIRST_INDEX);
+////            jpaQuery.setMaxResults(QueryUtil.MAX_RESULT);
+////        }
+//
+//        return new List<>(jpaQuery.getResultList(), count);
+		
 		return null;
 	}
 	

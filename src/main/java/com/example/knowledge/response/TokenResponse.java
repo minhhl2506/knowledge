@@ -25,5 +25,7 @@ public class TokenResponse implements Serializable {
 	private String type;
 
 	private String token;
+	
+	private int duration;
 
 }
