@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.example.knowledge.model.dto.CarResponse;
+import com.example.knowledge.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +29,8 @@ import lombok.RequiredArgsConstructor;
 public class CarController {
 
 	private final CarService carService;
+
+	private final UserRepository userRepository;
 
 	// @GetMapping("/")
 	// public String value() {
@@ -68,6 +72,11 @@ public class CarController {
 	@GetMapping("/search")
 	public ResponseEntity<List<CarDTO>> search(@RequestParam(value = "keyword", required = false) String keyword) {
 		return new ResponseEntity<List<CarDTO>>(this.carService.search(keyword), HttpStatus.OK);
+	}
+
+	@GetMapping("/join")
+	public ResponseEntity<List<CarResponse>> join() {
+		return new ResponseEntity<List<CarResponse>>(this.userRepository.getJoinInfor(), HttpStatus.OK);
 	}
 
 }

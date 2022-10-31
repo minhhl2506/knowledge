@@ -89,4 +89,10 @@
 			);
 		</sql>
 	</changeSet>
+
+	<changeSet author="MinhHL" id="s-2022-07-04-01-12">
+		<sql>
+			ALTER TABLE _car add user_id BIGINT;
+		</sql>
+	</changeSet>
 </databaseChangeLog>

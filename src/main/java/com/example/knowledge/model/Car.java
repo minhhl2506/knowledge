@@ -17,8 +17,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "_car")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
 public class Car implements Serializable {
 
@@ -34,4 +32,7 @@ public class Car implements Serializable {
 
 	@Column(name = "price", length = 255)
 	private int price;
+
+	@Column(name = "user_id")
+	private long userId;
 }
