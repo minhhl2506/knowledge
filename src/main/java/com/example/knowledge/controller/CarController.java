@@ -5,8 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import com.example.knowledge.model.dto.CarResponse;
-import com.example.knowledge.repository.UserRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.knowledge.annotation.InboundRequestLog;
+import com.example.knowledge.model.Car;
 import com.example.knowledge.model.dto.CarDTO;
+import com.example.knowledge.model.dto.CarResponse;
+import com.example.knowledge.repository.UserRepository;
 import com.example.knowledge.service.CarService;
 
 import lombok.RequiredArgsConstructor;
@@ -49,9 +51,9 @@ public class CarController {
 	}
 
 	@InboundRequestLog
-	@GetMapping("/findAll")
-	public ResponseEntity<List<CarDTO>> findAll1(HttpServletRequest request) {
-		return ResponseEntity.ok(this.carService.findAll1());
+	@GetMapping("/findAll/{pageIndex}/{pageSize}")
+	public ResponseEntity<Page<Car>> findAll1(HttpServletRequest request, @PathVariable int pageIndex, @PathVariable int pageSize) {
+		return ResponseEntity.ok(this.carService.findAll1(pageIndex, pageSize));
 	}
 	
 	@GetMapping("/detail/{id}")
@@ -70,8 +72,8 @@ public class CarController {
 	}
 	
 	@GetMapping("/search")
-	public ResponseEntity<List<CarDTO>> search(@RequestParam(value = "keyword", required = false) String keyword) {
-		return new ResponseEntity<List<CarDTO>>(this.carService.search(keyword), HttpStatus.OK);
+	public ResponseEntity<Page<CarDTO>> search(@RequestParam(value = "keyword", required = false) String keyword) {
+		return new ResponseEntity<Page<CarDTO>>(this.carService.search(keyword), HttpStatus.OK);
 	}
 
 	@GetMapping("/join")

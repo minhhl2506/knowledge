@@ -6,9 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import com.example.knowledge.cache.util.CacheConstants;
 import com.example.knowledge.model.Car;
+import com.example.knowledge.repository.extend.CarRepositoryExtend;
 
 @Repository
-public interface CarRepository extends JpaRepository<Car, Long> {
+public interface CarRepository extends JpaRepository<Car, Long>, CarRepositoryExtend {
 
 	@Cacheable(cacheNames = CacheConstants.Car.FIND_CAR_BY_ID, key = "#id", unless = "#result == null")
 	default Car findCarById(Long id) {

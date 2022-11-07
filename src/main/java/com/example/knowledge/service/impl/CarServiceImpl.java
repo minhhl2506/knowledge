@@ -6,6 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.knowledge.advice.BadRequestAlertException;
@@ -26,9 +30,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Transactional
 public class CarServiceImpl implements CarService {
-	
+
 	@PersistenceContext
-    private EntityManager entityManager;
+	private EntityManager entityManager;
 
 	private final CarRepository carRepository;
 
@@ -37,101 +41,27 @@ public class CarServiceImpl implements CarService {
 	private final CarMapper carMapper;
 
 	private final RsaProvider rsaProvider;
-	
+
 //	private final ValidationProperties validationProperties;
-	
+
 	@Override
-	public List<CarDTO> search(String keyword) {
-//		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
-//
-//        QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder()
-//                .forEntity(Car.class)
-//                .overridesForField(Car.FieldName.POSITION_NAME, Constants.AnalyzerDefName.EDGE_NGRAM_QUERY)
-//                .overridesForField(Position.FieldName.POSITION_SHORT_NAME, Constants.AnalyzerDefName.EDGE_NGRAM_QUERY)
-//                .overridesForField(Position.FieldName.POSITION_CODE, Constants.AnalyzerDefName.EDGE_NGRAM_QUERY)
-//                .get();
-//
-//        BooleanJunction<?> mustJunc = queryBuilder.bool();
-//
-////        mustJunc = mustJunc.must(queryBuilder.keyword().onField(Position.FieldName.STATUS)
-////                        .matching(EntityStatus.DELETED.getStatus()).createQuery()).not();
-////
-////        if (Validator.isNotNull(params.getStatus())) {
-////            mustJunc = mustJunc
-////                            .must(queryBuilder.keyword().onField(Position.FieldName.STATUS).matching(params.getStatus())
-////                                            .createQuery());
-////        }
-//
-//        if (!Validator.isNull(keyword)) {
-//            mustJunc = mustJunc.must(queryBuilder.keyword().wildcard()
-//                            .onField(Position.FieldName.POSITION_CODE)
-//                            .matching(QueryUtil.getFullWildcardParam(params.getPositionCode()))
-//                            .createQuery());
-//        }
-//
-//        if (Validator.isNotNull(params.getPositionName())) {
-//            mustJunc = mustJunc.must(queryBuilder.keyword().onField(Position.FieldName.POSITION_NAME)
-//                            .matching(params.getPositionName().toLowerCase())
-//                            .createQuery());
-//        }
-//
-//        if (Validator.isNotNull(params.getShortName())) {
-//            mustJunc = mustJunc.must(queryBuilder.keyword().onField(Position.FieldName.POSITION_SHORT_NAME)
-//                            .matching(params.getShortName().toLowerCase())
-//                            .createQuery());
-//        }
-//
-//        if (Validator.isNull(keyword)) {
-//            BooleanJunction<?> shouldJunc = queryBuilder.bool();
-//
-//            shouldJunc = shouldJunc
-//                            .should(queryBuilder
-//                                            .keyword()
-//                                            .onFields(Position.FieldName.POSITION_NAME,
-//                                                            Position.FieldName.POSITION_SHORT_NAME)
-//                                            .matching(keyword.toLowerCase()).createQuery())
-//                            .should(queryBuilder
-//                                            .keyword()
-//                                            .wildcard()
-//                                            .onFields(Position.FieldName.POSITION_CODE)
-//                                            .matching(QueryUtil.getFullWildcardParam(keyword)).createQuery());
-//
-//            mustJunc = mustJunc.must(shouldJunc.createQuery());
-//        }
-//
-//        org.apache.lucene.search.Query query = mustJunc.createQuery();
-//
-//        FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, Position.class);
-//
-//        Sort sort = queryBuilder.sort()
-//                .byScore().desc()
-//                .andByField(Position.SortName.POSITION_ID_SORT).desc()
-//                .createSort();
-//
-//        jpaQuery.setSort(sort);
-//
-//        int count = jpaQuery.getResultSize();
-//
-////        if (pageable != null) {
-////            jpaQuery.setFirstResult(pageable.getPageNumber() * pageable.getPageSize());
-////            jpaQuery.setMaxResults(pageable.getPageSize());
-////        } else {
-////            jpaQuery.setFirstResult(QueryUtil.FIRST_INDEX);
-////            jpaQuery.setMaxResults(QueryUtil.MAX_RESULT);
-////        }
-//
-//        return new List<>(jpaQuery.getResultList(), count);
-		
-		return null;
+	public Page<CarDTO> search(String keyword) {
+		Pageable pageable = PageRequest.of(0, 100);
+
+		List<Car> results = this.carRepository.searchByKeyWord(keyword, pageable);
+
+		return new PageImpl<>(this.carMapper.toDto(results), pageable, this.carRepository.count(keyword));
 	}
-	
+
 	@Override
 	public String getMessage() {
 		return Labels.getLabels(LabelKey.ERROR_CAR_NAME_IS_REQUIRED);
 	}
 
 	@Override
-	public List<CarDTO> findAll1() {
+	public Page<Car> findAll1(int pageIndex, int pageSize) {
+
+		Pageable pageable = PageRequest.of(pageIndex, pageSize);
 
 //		String encrypt;
 //		String decrypt;
@@ -148,30 +78,30 @@ public class CarServiceImpl implements CarService {
 //			e.printStackTrace();
 //		}
 
-		List<Car> cars = this.carRepository.findAll();
+		Page<Car> cars = this.carRepository.findAll(pageable);
 
-		return this.carMapper.toDto(cars);
+		return cars;
 	}
-	
+
 	@Override
 	public CarDTO create(CarDTO carDto) {
 		Car car = this.carMapper.toEntity(carDto);
-		
+
 		car = this.carRepository.save(car);
-		
+
 		return this.carMapper.toDto(car);
 	}
 
 	@Override
 	public CarDTO detail(Long id) {
-		
-		if(Validator.isNull(id)) {
+
+		if (Validator.isNull(id)) {
 			throw new BadRequestAlertException(MessageCode.MSG1001);
 		}
-		
+
 		Car car = this.carRepository.findCarById(id);
-		
-		if(Validator.isNull(car)) {
+
+		if (Validator.isNull(car)) {
 			throw new BadRequestAlertException(MessageCode.MSG1002);
 		}
 
@@ -186,7 +116,7 @@ public class CarServiceImpl implements CarService {
 
 		return this.carMapper.toEntity(carDtos);
 	}
-	
+
 //	@Override
 //	public String checkRegexPhoneNumber(String phoneNumber) {
 //		if(!this.validationProperties.isPhoneNumberValid(phoneNumber)) {

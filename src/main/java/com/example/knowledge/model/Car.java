@@ -11,13 +11,19 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "_car")
-@Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class Car implements Serializable {
 
 	/** The Constant serialVersionUID */
@@ -33,6 +39,6 @@ public class Car implements Serializable {
 	@Column(name = "price", length = 255)
 	private int price;
 
-	@Column(name = "user_id")
+	@Column(name = "user_id", nullable = true)
 	private long userId;
 }

@@ -1,5 +1,8 @@
 package com.example.knowledge;
 
+import org.hibernate.Session;
+import org.hibernate.search.FullTextSession;
+import org.hibernate.search.jpa.Search;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -23,7 +26,7 @@ import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties
 @EnableEncryptableProperties
 @EnableCaching
 public class KnowledgeApplication {
-		
+
 //	@Scheduled(cron = "${scheduling.cron}")
 //	public void home() {
 //		System.out.println("Now is " +Instant.now());
@@ -31,10 +34,9 @@ public class KnowledgeApplication {
 
 	public static void main(String[] args) throws SchedulerException {
 		JobDetail j = JobBuilder.newJob(MyObject.class).build();
-		
+
 		Trigger t = TriggerBuilder.newTrigger().withIdentity("CronTrigger")
-				.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(02)
-						.repeatForever()).build();
+				.withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(02).repeatForever()).build();
 		Scheduler s = StdSchedulerFactory.getDefaultScheduler();
 		s.start();
 		s.scheduleJob(j, t);
@@ -42,6 +44,7 @@ public class KnowledgeApplication {
 	}
 
 }
+
 /*
  * <dependency> <groupId>org.springframework.boot</groupId>
  * <artifactId>spring-boot-starter-security</artifactId> </dependency>

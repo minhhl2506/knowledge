@@ -2,15 +2,12 @@ package com.example.knowledge.service.impl;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.example.knowledge.advice.BadRequestAlertException;
 import com.example.knowledge.jwt.JWTTokenProvider;
-import com.example.knowledge.message.MessageCode;
 import com.example.knowledge.model.User;
 import com.example.knowledge.repository.UserRepository;
 import com.example.knowledge.request.LoginRequest;

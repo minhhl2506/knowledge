@@ -16,7 +16,7 @@ public class Validator {
 		if (str == null) {
 			return true;
 		}
-		
+
 		if (str.trim().length() <= 0) {
 			return true;
 		}
@@ -25,17 +25,17 @@ public class Validator {
 			return false;
 		}
 	}
-	
+
 	public static boolean isNull(Object obj) {
-		
-		if(obj instanceof Long) {
+
+		if (obj instanceof Long) {
 			return isNull((Long) obj);
 		}
-		
-		if(obj instanceof String) {
+
+		if (obj instanceof String) {
 			return isNull((String) obj);
 		}
-		
+
 		else if (obj == null) {
 			return true;
 		}
@@ -44,5 +44,9 @@ public class Validator {
 			return false;
 		}
 	}
-	
+
+	public static boolean isNotNull(String str) {
+		return !isNull(str);
+	}
+
 }
