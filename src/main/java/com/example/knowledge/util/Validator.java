@@ -48,5 +48,13 @@ public class Validator {
 	public static boolean isNotNull(String str) {
 		return !isNull(str);
 	}
+	
+	public static boolean isNotNull(Object obj) {
+		return !isNull(obj);
+	}
+	
+	public static boolean isNotNull(Long l) {
+		return !isNull(l);
+	}
 
 }

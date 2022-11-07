@@ -1,13 +1,16 @@
 package com.example.knowledge.util;
 
 public class QueryUtils {
+		
+	public static final String PERCENT = "%";
 	
 	public static String addFullQueryParam(String param) {
+		
 		StringBuilder str = new StringBuilder();
 		
-		str.append("%");
+		str.append(PERCENT);
 		str.append(param);
-		str.append("%");
+		str.append(PERCENT);
 		
 		return str.toString();
 	}
