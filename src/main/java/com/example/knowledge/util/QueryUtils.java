@@ -9,7 +9,7 @@ public class QueryUtils {
 		StringBuilder str = new StringBuilder();
 		
 		str.append(PERCENT);
-		str.append(param);
+		str.append(param.trim());
 		str.append(PERCENT);
 		
 		return str.toString();
