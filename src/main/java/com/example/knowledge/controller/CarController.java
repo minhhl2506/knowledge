@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.knowledge.annotation.InboundRequestLog;
-import com.example.knowledge.model.Car;
 import com.example.knowledge.model.dto.CarDTO;
 import com.example.knowledge.model.dto.CarResponse;
 import com.example.knowledge.repository.UserRepository;
@@ -32,39 +31,18 @@ public class CarController {
 
 	private final CarService carService;
 
-	private final UserRepository userRepository;
+	private final UserRepository userRepository; 
 
-	// @GetMapping("/")
-	// public String value() {
-	// return this.carService.getValue();
-	// }
-
-//	@GetMapping("/findAll")
-//	public List<Car> findAll() {
-//		return this.carService.findAll();
-//	}  
-	
 	@InboundRequestLog
 	@PostMapping("/create")
 	public ResponseEntity<CarDTO> create(HttpServletRequest request, @Valid @RequestBody CarDTO carDto) {
 		return ResponseEntity.ok().body(this.carService.create(carDto));
-	}
-
-	@InboundRequestLog
-	@GetMapping("/findAll/{pageIndex}/{pageSize}")
-	public ResponseEntity<Page<Car>> findAll1(HttpServletRequest request, @PathVariable int pageIndex, @PathVariable int pageSize) {
-		return ResponseEntity.ok(this.carService.findAll1(pageIndex, pageSize));
 	}
 	
 	@GetMapping("/detail/{id}")
 	public ResponseEntity<CarDTO> detail(@PathVariable("id") Long id) {
 		return ResponseEntity.ok(this.carService.detail(id));
 	}
-
-//	@GetMapping("/checkRegexPhoneNumber")
-//	public String checkRegexPhoneNumber(@RequestParam(name = "phoneNumber") String phoneNumber) {
-//		return this.carService.checkRegexPhoneNumber(phoneNumber);
-//	}
 	
 	@GetMapping("/locale")
 	public String locale() {

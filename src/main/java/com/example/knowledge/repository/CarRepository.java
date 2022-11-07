@@ -15,4 +15,8 @@ public interface CarRepository extends JpaRepository<Car, Long>, CarRepositoryEx
 	default Car findCarById(Long id) {
 		return this.findById(id).orElse(null);
 	}
+	
+	default Car save_(Car car) {
+		return this.save(car);
+	}
 }

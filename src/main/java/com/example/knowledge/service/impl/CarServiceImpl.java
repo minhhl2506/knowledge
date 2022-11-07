@@ -59,35 +59,10 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
-	public Page<Car> findAll1(int pageIndex, int pageSize) {
-
-		Pageable pageable = PageRequest.of(pageIndex, pageSize);
-
-//		String encrypt;
-//		String decrypt;
-//		
-//		try {
-//			
-//			encrypt = rsaProvider.encrypt("minhmomi");
-//			decrypt = this.rsaProvider.decrypt(encrypt);
-//			
-//			System.out.println(encrypt);
-//			System.out.println(decrypt);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
-		Page<Car> cars = this.carRepository.findAll(pageable);
-
-		return cars;
-	}
-
-	@Override
 	public CarDTO create(CarDTO carDto) {
 		Car car = this.carMapper.toEntity(carDto);
 
-		car = this.carRepository.save(car);
+		car = this.carRepository.save_(car);
 
 		return this.carMapper.toDto(car);
 	}
@@ -107,23 +82,5 @@ public class CarServiceImpl implements CarService {
 
 		return this.carMapper.toDto(car);
 	}
-
-	@Override
-	public List<Car> findAll() {
-		List<Car> cars = this.carRepository.findAll();
-
-		List<CarDTO> carDtos = this.carMapper.toDto(cars);
-
-		return this.carMapper.toEntity(carDtos);
-	}
-
-//	@Override
-//	public String checkRegexPhoneNumber(String phoneNumber) {
-//		if(!this.validationProperties.isPhoneNumberValid(phoneNumber)) {
-//			return "SĐT không hợp lệ";
-//		}
-//		
-//		return phoneNumber;
-//	}
 
 }

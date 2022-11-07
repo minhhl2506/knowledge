@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Pageable;
 
@@ -16,7 +15,6 @@ import com.example.knowledge.repository.extend.CarRepositoryExtend;
 import com.example.knowledge.util.QueryUtils;
 import com.example.knowledge.util.Validator;
 
-@Transactional
 public class CarRepositoryImpl implements CarRepositoryExtend {
 
 	@PersistenceContext
