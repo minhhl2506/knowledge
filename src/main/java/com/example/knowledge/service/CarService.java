@@ -9,6 +9,8 @@ public interface CarService {
 	CarDTO detail(Long id);
 
 	Page<CarDTO> search(String keyword);
+	
+	Page<CarDTO> searchByKeyword(String keyword);
 
 	CarDTO create(CarDTO carDto);
 	

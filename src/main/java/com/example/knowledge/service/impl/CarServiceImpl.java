@@ -14,10 +14,12 @@ import org.springframework.stereotype.Service;
 
 import com.example.knowledge.advice.BadRequestAlertException;
 import com.example.knowledge.configuration.RsaProvider;
+import com.example.knowledge.enums.EntityStatus;
 import com.example.knowledge.label.LabelKey;
 import com.example.knowledge.label.Labels;
 import com.example.knowledge.message.MessageCode;
 import com.example.knowledge.model.Car;
+import com.example.knowledge.model.ResultSet;
 import com.example.knowledge.model.dto.CarDTO;
 import com.example.knowledge.repository.CarRepository;
 import com.example.knowledge.service.CarService;
@@ -48,7 +50,7 @@ public class CarServiceImpl implements CarService {
 	public Page<CarDTO> search(String keyword) {
 		Pageable pageable = PageRequest.of(0, 100);
 
-		List<Car> results = this.carRepository.searchByKeyWord(keyword, pageable);
+		List<Car> results = this.carRepository.search(keyword, pageable);
 
 		return new PageImpl<>(this.carMapper.toDto(results), pageable, this.carRepository.count(keyword));
 	}
@@ -61,6 +63,8 @@ public class CarServiceImpl implements CarService {
 	@Override
 	public CarDTO create(CarDTO carDto) {
 		Car car = this.carMapper.toEntity(carDto);
+		
+		car.setStatus(EntityStatus.ACTIVE.getStatus());
 
 		car = this.carRepository.save_(car);
 
@@ -81,6 +85,17 @@ public class CarServiceImpl implements CarService {
 		}
 
 		return this.carMapper.toDto(car);
+	}
+	
+	@Override
+	public Page<CarDTO> searchByKeyword(String keyword) {
+		Pageable pageable = PageRequest.of(0, 100);
+		
+		ResultSet<Car> results = this.carRepository.searchByKeyword(keyword, pageable);
+		
+		return new PageImpl<>(this.carMapper.toDto(results.getResults()), pageable, results.getCount());
+		
+		
 	}
 
 }

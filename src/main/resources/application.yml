@@ -19,8 +19,10 @@ spring:
     hibernate:
       ddl-auto: 'update'
   properties:
+    hibernate.search.indexing_strategy: manual
     hibernate.search.default.directory_provider: filesystem
     hibernate.search.default.indexBase: 'indexes'
+    hibernate.search.default.indexmanager: near-real-time
   messages:
     encoding: 'UTF-8'
     use-code-as-default-message: true

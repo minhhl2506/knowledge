@@ -95,4 +95,22 @@
 			ALTER TABLE _car add user_id BIGINT;
 		</sql>
 	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-13">
+		<sql>
+			ALTER TABLE _car add created_date TIMESTAMP;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-14">
+		<sql>
+			ALTER TABLE _car add last_modified_date TIMESTAMP;
+		</sql>
+	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-15">
+		<sql>
+			ALTER TABLE _car add status INT;
+		</sql>
+	</changeSet>
 </databaseChangeLog>

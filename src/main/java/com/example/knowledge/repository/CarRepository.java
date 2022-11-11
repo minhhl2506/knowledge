@@ -19,4 +19,5 @@ public interface CarRepository extends JpaRepository<Car, Long>, CarRepositoryEx
 	default Car save_(Car car) {
 		return this.save(car);
 	}
+	
 }

@@ -53,6 +53,11 @@ public class CarController {
 	public ResponseEntity<Page<CarDTO>> search(@RequestParam(value = "keyword", required = false) String keyword) {
 		return new ResponseEntity<Page<CarDTO>>(this.carService.search(keyword), HttpStatus.OK);
 	}
+	
+	@GetMapping("/search-by-keyword")
+	public ResponseEntity<Page<CarDTO>> searchByKeyword(@RequestParam(value = "keyword", required = false) String keyword) {
+		return new ResponseEntity<Page<CarDTO>>(this.carService.searchByKeyword(keyword), HttpStatus.OK);
+	}
 
 	@GetMapping("/join")
 	public ResponseEntity<List<CarResponse>> join() {
