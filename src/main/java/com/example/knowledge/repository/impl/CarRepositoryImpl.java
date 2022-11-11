@@ -7,10 +7,10 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.apache.lucene.search.Query;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
-import org.hibernate.search.query.dsl.BooleanJunction;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.data.domain.Pageable;
 
@@ -103,37 +103,74 @@ public class CarRepositoryImpl implements CarRepositoryExtend {
 	
 	@Override
 	public ResultSet<Car> searchByKeyword(String keyword, Pageable pageable) {
-		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
-
-		QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder()
-                .forEntity(Car.class)
-                .get();
-        
-        BooleanJunction<?> mustJunc = queryBuilder.bool();
-        
-        mustJunc = mustJunc.must(queryBuilder
-                .range()
-                .onField(Car.FieldName.PRICE)
-                .from(0).to(50000000).createQuery());
-        
-        org.apache.lucene.search.Query query = mustJunc.createQuery();
-
-        FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, Car.class);
-        
-//        SortFieldContext sortFieldContext = queryBuilder.sort()
-//                .byScore().desc()
-//                .andByField("lastModifiedDate").desc();
+		try {
+			FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
+			
+			fullTextEntityManager.createIndexer().startAndWait();
+			
+			QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory() 
+					  .buildQueryBuilder()
+					  .forEntity(Car.class)
+					  .get();
+			
+			Query query = queryBuilder
+					  .keyword()
+					  .onField(Car.FieldName.NAME)
+					  .matching(keyword)
+					  .createQuery();
+			
+			FullTextQuery fullTextQuery
+			  = fullTextEntityManager.createFullTextQuery(query, Car.class);
+			
+			return new ResultSet<>(fullTextQuery.getResultList(), fullTextQuery.getResultSize());
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+//		FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(this.entityManager);
+//
+//		QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder()
+//                .forEntity(Car.class)
+//                .get();
 //        
-//        Sort sort = sortFieldContext.createSort();
+//        BooleanJunction<?> mustJunc = queryBuilder.bool();
 //        
-//        jpaQuery.setSort(sort);
-        
-        int count = jpaQuery.getResultSize();
-
-        jpaQuery.setFirstResult(pageable.getPageNumber() * pageable.getPageSize());
-        jpaQuery.setMaxResults(pageable.getPageSize());
-
-        return new ResultSet<>(jpaQuery.getResultList(), count);
+//        mustJunc = mustJunc.must(queryBuilder
+//                .keyword()
+//                .onField(Car.FieldName.STATUS)
+//                .matching(EntityStatus.DELETED.getStatus()).createQuery()).not();
+//        
+//        if (Validator.isNotNull(keyword)) {
+//
+//            BooleanJunction<?> shouldJunc = queryBuilder.bool();
+//
+//            shouldJunc = shouldJunc
+//                            .should(queryBuilder
+//                                            .keyword()
+//                                            .onField(Car.FieldName.NAME)
+//                                            .matching(keyword.toLowerCase()).createQuery());
+//            
+//            mustJunc = mustJunc.must(shouldJunc.createQuery());
+//        }
+//        
+//        org.apache.lucene.search.Query query = mustJunc.createQuery();
+//
+//        FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, Car.class);
+//        
+////        SortFieldContext sortFieldContext = queryBuilder.sort()
+////                .byScore().desc()
+////                .andByField("lastModifiedDate").desc();
+////        
+////        Sort sort = sortFieldContext.createSort();
+////        
+////        jpaQuery.setSort(sort);
+//        
+//        int count = jpaQuery.getResultSize();
+//
+//        jpaQuery.setFirstResult(pageable.getPageNumber() * pageable.getPageSize());
+//        jpaQuery.setMaxResults(pageable.getPageSize());
+//
+//        return new ResultSet<>(jpaQuery.getResultList(), count);
         
 	}
 

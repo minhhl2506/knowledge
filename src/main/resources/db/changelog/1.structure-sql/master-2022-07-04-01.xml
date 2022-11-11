@@ -113,4 +113,10 @@
 			ALTER TABLE _car add status INT;
 		</sql>
 	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-16">
+		<sql>
+			CREATE INDEX car_name_index on _car (name);
+		</sql>
+	</changeSet>
 </databaseChangeLog>
