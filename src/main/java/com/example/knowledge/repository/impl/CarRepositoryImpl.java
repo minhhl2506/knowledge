@@ -14,6 +14,7 @@ import org.hibernate.search.query.dsl.BooleanJunction;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.data.domain.Pageable;
 
+import com.example.knowledge.cache.util.Constants;
 import com.example.knowledge.enums.EntityStatus;
 import com.example.knowledge.model.Car;
 import com.example.knowledge.model.ResultSet;
@@ -109,12 +110,15 @@ public class CarRepositoryImpl implements CarRepositoryExtend {
 			fullTextEntityManager.createIndexer().startAndWait();
 
 			QueryBuilder queryBuilder = fullTextEntityManager.getSearchFactory().buildQueryBuilder()
-					.forEntity(Car.class).get();
+                    .forEntity(Car.class)
+                    .overridesForField(Car.FieldName.NAME,
+                                    Constants.AnalyzerDefName.EDGE_NGRAM_QUERY)
+                    .get();
 
 			BooleanJunction<?> mustJunc = queryBuilder.bool();
 
-			mustJunc = mustJunc.must(queryBuilder.keyword().onField(Car.FieldName.STATUS)
-					.matching(EntityStatus.DELETED.getStatus()).createQuery()).not();
+	        mustJunc = mustJunc.must(queryBuilder.keyword().onField(Car.FieldName.STATUS)
+                    .matching(EntityStatus.DELETED.getStatus()).createQuery()).not();
 
 			if (Validator.isNotNull(keyword)) {
 
@@ -130,13 +134,12 @@ public class CarRepositoryImpl implements CarRepositoryExtend {
 
 			FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, Car.class);
 
-//  SortFieldContext sortFieldContext = queryBuilder.sort()
-//          .byScore().desc()
-//          .andByField("lastModifiedDate").desc();
-//  
-//  Sort sort = sortFieldContext.createSort();
-//  
-//  jpaQuery.setSort(sort);
+//			SortFieldContext sortFieldContext = queryBuilder.sort().byScore().desc().andByField("lastModifiedDate")
+//					.desc();
+//
+//			Sort sort = sortFieldContext.createSort();
+//
+//			jpaQuery.setSort(sort);
 
 			int count = jpaQuery.getResultSize();
 

@@ -119,4 +119,16 @@
 			CREATE INDEX car_name_index on _car (name);
 		</sql>
 	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-17">
+		<sql>
+			ALTER TABLE _car add created_by varchar(255);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-18">
+		<sql>
+			ALTER TABLE _car add last_modified_by varchar(255);
+		</sql>
+	</changeSet>
 </databaseChangeLog>

@@ -61,6 +61,7 @@ public class Car extends AbstractEntity implements Serializable {
 	@Column(name = "price", length = 255)
 	private int price;
 	
+	@Field
 	@Column(name = "status", nullable = false, length = 1)
 	private int status;
 
@@ -68,14 +69,14 @@ public class Car extends AbstractEntity implements Serializable {
 	private long userId;
 	
 	public interface FieldName {
-		public static final String NAME = "name";
+		String NAME = "name";
 		
-		public static final String PRICE = "price";
+		String PRICE = "price";
 
-		public static final String STATUS = "status";
+		String STATUS = "status";
 	}
 	
 	public interface SortName {
-		public static final String NAME_SORT = "nameSort";
+		String NAME_SORT = "nameSort";
 	}
 }

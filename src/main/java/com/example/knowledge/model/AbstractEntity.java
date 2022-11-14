@@ -15,9 +15,12 @@ import org.apache.lucene.analysis.ngram.EdgeNGramFilterFactory;
 import org.hibernate.search.annotations.AnalyzerDef;
 import org.hibernate.search.annotations.NormalizerDef;
 import org.hibernate.search.annotations.Parameter;
+import org.hibernate.search.annotations.SortableField;
 import org.hibernate.search.annotations.TokenFilterDef;
 import org.hibernate.search.annotations.TokenizerDef;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -55,12 +58,18 @@ public abstract class AbstractEntity implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 4737229646610526219L;
-
+	
+	@CreatedBy
+	@Column(name = "created_by", length = 255)
+	private String createdBy;
 
 	@CreatedDate
 	@Column(name = "created_date", updatable = false)
 	private Instant createdDate = Instant.now();
 
+	@LastModifiedBy
+	@Column(name = "last_modified_by", length = 255)
+	private String clastModifiedBy;
 
 	@LastModifiedDate
 	@Column(name = "last_modified_date")
