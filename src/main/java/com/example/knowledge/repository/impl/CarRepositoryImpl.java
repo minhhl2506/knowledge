@@ -119,6 +119,10 @@ public class CarRepositoryImpl implements CarRepositoryExtend {
 
 	        mustJunc = mustJunc.must(queryBuilder.keyword().onField(Car.FieldName.STATUS)
                     .matching(EntityStatus.DELETED.getStatus()).createQuery()).not();
+	        
+	        mustJunc = mustJunc.must(queryBuilder.range().onField(Car.FieldName.PRICE)
+                    .below(1200000)
+                    .createQuery());
 
 			if (Validator.isNotNull(keyword)) {
 
@@ -134,7 +138,8 @@ public class CarRepositoryImpl implements CarRepositoryExtend {
 
 			FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, Car.class);
 
-//			SortFieldContext sortFieldContext = queryBuilder.sort().byScore().desc().andByField("lastModifiedDate")
+//			SortFieldContext sortFieldContext = queryBuilder.sort().byScore()
+//					.andByField("lastModifiedDate")
 //					.desc();
 //
 //			Sort sort = sortFieldContext.createSort();
