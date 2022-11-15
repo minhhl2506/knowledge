@@ -24,7 +24,7 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(value = BadRequestAlertException.class)
 	public ResponseEntity<ErrorMessage> handleBadRequestException(BadRequestAlertException ex, WebRequest webRequest) {
 		ErrorMessage errorMessage = new ErrorMessage(HttpStatus.BAD_REQUEST.value(), new Date(),
-				ex.getMessageCode().getKey());
+				Labels.getLabels(ex.getMessageCode().getKey()));
 		return new ResponseEntity<ErrorMessage>(errorMessage, HttpStatus.BAD_REQUEST);
 	}
 
