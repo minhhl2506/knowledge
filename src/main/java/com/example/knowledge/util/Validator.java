@@ -48,6 +48,20 @@ public class Validator {
 	public static boolean isEquals(int int1, int int2) {
 		return int1 == int2;
 	}
+	
+	public static boolean isEquals(long long1, long long2) {
+		return long1 == long2;
+	}
+	
+	public static boolean equals(Object obj1, Object obj2) {
+		if ((obj1 == null) && (obj2 == null)) {
+			return true;
+		} else if ((obj1 == null) || (obj2 == null)) {
+			return false;
+		} else {
+			return obj1.equals(obj2);
+		}
+	}
 
 	public static boolean isNotNull(String str) {
 		return !isNull(str);
