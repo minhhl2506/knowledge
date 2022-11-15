@@ -44,6 +44,10 @@ public class Validator {
 			return false;
 		}
 	}
+	
+	public static boolean isEquals(int int1, int int2) {
+		return int1 == int2;
+	}
 
 	public static boolean isNotNull(String str) {
 		return !isNull(str);

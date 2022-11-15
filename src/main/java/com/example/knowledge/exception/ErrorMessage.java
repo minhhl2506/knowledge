@@ -30,6 +30,13 @@ public class ErrorMessage {
 		this.message = message;
 	}
 
+	public ErrorMessage(int statusCode, Date timestamp, Map<String, String> listErrors, String message) {
+		this.statusCode = statusCode;
+		this.timestamp = timestamp;
+		this.listErrors = listErrors;
+		this.message = message;
+	}
+
 //	public BadRequestAlertException(int value, Date date, String message, String description) {
 //		// TODO Auto-generated constructor stub
 //	}

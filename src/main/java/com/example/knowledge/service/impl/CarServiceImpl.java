@@ -27,6 +27,7 @@ import com.example.knowledge.service.mapper.CarMapper;
 import com.example.knowledge.util.Validator;
 
 import lombok.RequiredArgsConstructor;
+import net.snowflake.client.jdbc.ErrorCode;
 
 @Service
 @RequiredArgsConstructor
@@ -63,7 +64,7 @@ public class CarServiceImpl implements CarService {
 	@Override
 	public CarDTO create(CarDTO carDto) {
 		Car car = this.carMapper.toEntity(carDto);
-		
+
 		car.setStatus(EntityStatus.ACTIVE.getStatus());
 
 		car = this.carRepository.save_(car);
@@ -74,28 +75,59 @@ public class CarServiceImpl implements CarService {
 	@Override
 	public CarDTO detail(Long id) {
 
+		Car car = this.findById(id);
+
+		return this.carMapper.toDto(car);
+	}
+
+	@Override
+	public Page<CarDTO> searchByKeyword(String keyword) {
+		Pageable pageable = PageRequest.of(0, 100);
+
+		ResultSet<Car> results = this.carRepository.searchByKeyword(keyword, pageable);
+
+		return new PageImpl<>(this.carMapper.toDto(results.getResults()), pageable, results.getCount());
+	}
+
+	@Override
+	public void delete(Long id) {
+		Car car = this.findById(id);
+
+		car.setStatus(EntityStatus.DELETED.getStatus());
+
+		this.carRepository.save_(car);
+	}
+
+	@Override
+	public CarDTO update(CarDTO dto) {
+		Car car = this.findById(dto.getCarId());
+		
+		car = this.carMapper.toEntity(dto);
+		
+		car.setStatus(EntityStatus.ACTIVE.getStatus());
+				
+		car = this.carRepository.save_(car);
+		
+		return this.carMapper.toDto(car);
+	}
+
+	private Car findById(Long id) {
+		
 		if (Validator.isNull(id)) {
 			throw new BadRequestAlertException(MessageCode.MSG1001);
 		}
-
+		
 		Car car = this.carRepository.findCarById(id);
 
 		if (Validator.isNull(car)) {
 			throw new BadRequestAlertException(MessageCode.MSG1002);
 		}
-
-		return this.carMapper.toDto(car);
-	}
-	
-	@Override
-	public Page<CarDTO> searchByKeyword(String keyword) {
-		Pageable pageable = PageRequest.of(0, 100);
 		
-		ResultSet<Car> results = this.carRepository.searchByKeyword(keyword, pageable);
+		if (Validator.isEquals(car.getStatus(), EntityStatus.DELETED.getStatus())) {
+			throw new BadRequestAlertException(MessageCode.MSG1002);
+		}
 		
-		return new PageImpl<>(this.carMapper.toDto(results.getResults()), pageable, results.getCount());
-		
-		
+		return car;
 	}
 
 }

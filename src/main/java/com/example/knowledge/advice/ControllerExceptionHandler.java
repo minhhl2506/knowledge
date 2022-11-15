@@ -43,7 +43,7 @@ public class ControllerExceptionHandler {
 		Map<String, String> errorMap = new HashMap<>();
 
 		ex.getBindingResult().getFieldErrors().forEach(error -> {
-			errorMap.put(error.getField(), error.getDefaultMessage());
+			errorMap.put(error.getField(), Labels.getLabels(error.getDefaultMessage()));
 		});
 
 		ErrorMessage errorMessage = new ErrorMessage(HttpStatus.BAD_REQUEST.value(), new Date(), errorMap);

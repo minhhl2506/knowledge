@@ -16,4 +16,8 @@ public interface CarService {
 	
 	String getMessage();
 
+	void delete(Long id);
+
+	CarDTO update(CarDTO dto);
+
 }

@@ -1,6 +1,7 @@
 package com.example.knowledge.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Normalizer;
+import org.hibernate.search.annotations.SortableField;
 import org.hibernate.search.annotations.Store;
 import org.hibernate.search.annotations.TermVector;
 
@@ -65,6 +67,12 @@ public class Car extends AbstractEntity implements Serializable {
 	@Field
 	@Column(name = "status", nullable = false, length = 1)
 	private int status;
+	
+	@Field(termVector = TermVector.YES, index = Index.YES, analyze = Analyze.YES, store = Store.YES)
+	@Field(name = "lastModifiedDate", index = Index.YES, analyze = Analyze.NO, store = Store.YES)
+    @SortableField(forField = "lastModifiedDate")
+    @Column(name = "LAST_MODIFIED_DATE", updatable = false, insertable = false)
+    private LocalDateTime lastModifiedDateTime;
 
 	@Column(name = "user_id", nullable = true)
 	private long userId;

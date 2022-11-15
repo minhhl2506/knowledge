@@ -7,11 +7,13 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.apache.lucene.search.Sort;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.dsl.BooleanJunction;
 import org.hibernate.search.query.dsl.QueryBuilder;
+import org.hibernate.search.query.dsl.sort.SortFieldContext;
 import org.springframework.data.domain.Pageable;
 
 import com.example.knowledge.cache.util.Constants;
@@ -138,13 +140,13 @@ public class CarRepositoryImpl implements CarRepositoryExtend {
 
 			FullTextQuery jpaQuery = fullTextEntityManager.createFullTextQuery(query, Car.class);
 
-//			SortFieldContext sortFieldContext = queryBuilder.sort().byScore()
-//					.andByField("lastModifiedDate")
-//					.desc();
-//
-//			Sort sort = sortFieldContext.createSort();
-//
-//			jpaQuery.setSort(sort);
+			SortFieldContext sortFieldContext = queryBuilder.sort().byScore()
+					.andByField("lastModifiedDate")
+					.desc();
+
+			Sort sort = sortFieldContext.createSort();
+
+			jpaQuery.setSort(sort);
 
 			int count = jpaQuery.getResultSize();
 

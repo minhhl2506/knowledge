@@ -24,7 +24,7 @@ public class CarDTO implements Serializable {
 	/** The Constant serialVersionUID */
 	private static final long serialVersionUID = -5459945621091646258L;
 
-	private long carId;
+	private Long carId;
 
 	@NotBlank(message = LabelKey.ERROR_CAR_NAME_IS_REQUIRED)
 	@Size(max = ValidateConstraint.LENGTH.CAR_NAME_MAX_LENGTH, message = LabelKey.ERROR_CAR_NAME_MAX_LENGTH_IS_INVALID)
