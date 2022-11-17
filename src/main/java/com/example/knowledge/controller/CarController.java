@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,12 +19,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.example.knowledge.annotation.InboundRequestLog;
+import com.example.knowledge.model.AClass;
 import com.example.knowledge.model.dto.CarDTO;
 import com.example.knowledge.model.dto.CarResponse;
 import com.example.knowledge.repository.UserRepository;
 import com.example.knowledge.service.CarService;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import lombok.RequiredArgsConstructor;
 
@@ -49,7 +53,7 @@ public class CarController {
 	}
 	
 	@GetMapping("/locale")
-	@RolesAllowed("ROLE_ADMIN")
+	@RolesAllowed("ROLE_USER")
 	public String locale() {
 		return this.carService.getMessage(); 
 	}
@@ -80,5 +84,25 @@ public class CarController {
 	public ResponseEntity<List<CarResponse>> join() {
 		return new ResponseEntity<List<CarResponse>>(this.userRepository.getJoinInfor(), HttpStatus.OK);
 	}
+	
+	@GetMapping("/3rd-party")
+    public ResponseEntity<?> getCountry() {
+        try {
+        	RestTemplate restTemplate = new RestTemplate();
+        	String thirdPartyApiUrl
+        	  = "http://localhost:9090/hello";
+        	ResponseEntity<String> response
+        	  = restTemplate.exchange(thirdPartyApiUrl, HttpMethod.GET, null, String.class);
+        	Gson gson = new Gson();
+        	JsonObject convertedObject = gson.fromJson(response.getBody(), JsonObject.class);
+        	AClass a = new AClass();
+        	a.setAId(convertedObject.get("id").getAsInt());
+        	a.setAName(convertedObject.get("name").getAsString());
+            return new ResponseEntity<>(a, HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>("Error!, Please try again", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
