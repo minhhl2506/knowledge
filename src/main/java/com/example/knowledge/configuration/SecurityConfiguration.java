@@ -39,6 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests().antMatchers(PUBLIC_URLS)
                         .permitAll()
+                		.antMatchers("/car/search").hasAuthority("ROLE_ADMIN")
                         .anyRequest()
                         .authenticated();
         http.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);

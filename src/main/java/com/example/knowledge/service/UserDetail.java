@@ -1,8 +1,11 @@
 package com.example.knowledge.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.knowledge.model.User;
@@ -22,8 +25,16 @@ public class UserDetail implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+
+//		List<Role> roles = this.roleRepository.findByUserId(1L);
+
+//		user.setRoles(roles);
+
+		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+		return authorities;
 	}
 
 	@Override

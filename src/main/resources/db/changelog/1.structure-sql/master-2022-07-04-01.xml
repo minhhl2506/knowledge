@@ -131,4 +131,29 @@
 			ALTER TABLE _car add last_modified_by varchar(255);
 		</sql>
 	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-19">
+		<sql>
+			CREATE TABLE _role (
+			id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+			role_name VARCHAR(255) not null
+			);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-20">
+		<sql>
+			CREATE TABLE _user_role (
+			user_id BIGINT,
+			role_id BIGINT
+			);
+		</sql>
+	</changeSet>
+	
+		<changeSet author="MinhHL" id="s-2022-07-04-01-21">
+		<sql>
+			ALTER TABLE _user_role
+			ADD PRIMARY KEY (user_id,role_id);
+		</sql>
+	</changeSet>
 </databaseChangeLog>
