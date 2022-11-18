@@ -53,8 +53,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	private com.example.knowledge.security.UserPrincipal createSpringSecurityUser(String username, User user) {
 
         List<Role> roles = this.roleRepository.findByUserId(user.getId());
-        
-        System.out.println(roles);
 
         // set list of roles into user
         user.setRoles(roles);

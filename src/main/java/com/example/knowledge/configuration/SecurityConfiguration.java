@@ -44,7 +44,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .and()
                         .authorizeRequests()
                         .and()
-                        .httpBasic();
+                        .httpBasic()
+                        .and()
+                        .formLogin().disable();
         http.addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         http.cors();
     }

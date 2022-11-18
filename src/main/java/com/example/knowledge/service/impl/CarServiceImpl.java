@@ -27,7 +27,6 @@ import com.example.knowledge.service.mapper.CarMapper;
 import com.example.knowledge.util.Validator;
 
 import lombok.RequiredArgsConstructor;
-import net.snowflake.client.jdbc.ErrorCode;
 
 @Service
 @RequiredArgsConstructor
