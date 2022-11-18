@@ -41,14 +41,14 @@ public class JWTTokenProvider {
 		return Keys.hmacShaKeyFor(keyBytes);
 	}
 
-    public ResponseEntity<TokenResponse> createToken(UserDetails userDetails) {
+    public TokenResponse createToken(String username) {
     	
     	Map<String, Object> claims = new HashMap<>();
     	
-    	return generateToken(claims, userDetails.getUsername());
+    	return generateToken(claims, username);
     }
 
-    public ResponseEntity<TokenResponse> generateToken(Map<String, Object> claims, String username) {
+    public TokenResponse generateToken(Map<String, Object> claims, String username) {
         
     	Date expiration = DateUtils.getDateAfterSecond(new Date(), this.tokenProperties.getToken());
     	
@@ -64,7 +64,7 @@ public class JWTTokenProvider {
         											.duration(this.tokenProperties.getToken())
         											.build();
         
-        return new ResponseEntity<>(tokenResponse, HttpStatus.OK);
+        return tokenResponse;
     }
 
     public String getUsernameFromToken(String token) {
