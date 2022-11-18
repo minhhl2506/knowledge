@@ -18,4 +18,6 @@ public interface LabelKey {
 	public static final String USER_DOESNT_EXIST = "error.user-doesnt-exist";
 
 	public static final String ERROR_ACCESS_DENIED_EXCEPTION = "error.you-dont-have-the-rights-to-access-this-url";
+
+	public static final String ERROR_TOKEN_EXPIRED = "error.token-expired";
 }

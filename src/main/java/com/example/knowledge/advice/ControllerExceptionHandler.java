@@ -19,6 +19,8 @@ import com.example.knowledge.label.LabelKey;
 import com.example.knowledge.label.Labels;
 import com.example.knowledge.util.ApiConstants;
 
+import io.jsonwebtoken.ExpiredJwtException;
+
 @RestControllerAdvice
 public class ControllerExceptionHandler {
 
@@ -56,7 +58,16 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(value = AccessDeniedException.class)
 	public ResponseEntity<ErrorMessage> handleAccessDeniedException(AccessDeniedException ex) {
 
-		ErrorMessage errorMessage = new ErrorMessage(HttpStatus.UNAUTHORIZED.value(), new Date(), Labels.getLabels(LabelKey.ERROR_ACCESS_DENIED_EXCEPTION));
+		ErrorMessage errorMessage = new ErrorMessage(HttpStatus.FORBIDDEN.value(), new Date(), Labels.getLabels(LabelKey.ERROR_ACCESS_DENIED_EXCEPTION));
+
+		return new ResponseEntity<ErrorMessage>(errorMessage, HttpStatus.FORBIDDEN);
+
+	}
+	
+	@ExceptionHandler(value = ExpiredJwtException.class)
+	public ResponseEntity<ErrorMessage> handleExpiredJwtException(ExpiredJwtException ex) {
+
+		ErrorMessage errorMessage = new ErrorMessage(HttpStatus.UNAUTHORIZED.value(), new Date(), Labels.getLabels(LabelKey.ERROR_TOKEN_EXPIRED));
 
 		return new ResponseEntity<ErrorMessage>(errorMessage, HttpStatus.UNAUTHORIZED);
 
