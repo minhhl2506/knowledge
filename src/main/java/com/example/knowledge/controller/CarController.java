@@ -52,7 +52,7 @@ public class CarController {
 	@GetMapping("/detail/{id}")
 	public ResponseEntity<CarDTO> detail(@PathVariable("id") Long id) {
 		return ResponseEntity.ok(this.carService.detail(id));
-	}
+	} 
 	
 	@GetMapping("/locale")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")

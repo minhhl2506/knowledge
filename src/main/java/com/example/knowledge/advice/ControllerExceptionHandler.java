@@ -58,7 +58,7 @@ public class ControllerExceptionHandler {
 
 		ErrorMessage errorMessage = new ErrorMessage(HttpStatus.UNAUTHORIZED.value(), new Date(), Labels.getLabels(LabelKey.ERROR_ACCESS_DENIED_EXCEPTION));
 
-		return new ResponseEntity<ErrorMessage>(errorMessage, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<ErrorMessage>(errorMessage, HttpStatus.UNAUTHORIZED);
 
 	}
 

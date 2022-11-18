@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.NoSuchMessageException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -74,8 +75,19 @@ public class Labels {
 	}
 
 	public static String getLabels(String key, Object[] objs, Locale locale) {
+		String ms = null;
 
-		return messageSource.getMessage(key, null, locale);
+        try {
+            if (locale == null) {
+                locale = getDefaultLocale();
+            }
+
+            ms = messageSource.getMessage(key, objs, locale);
+        } catch (NoSuchMessageException ex) {
+            
+        }
+
+        return ms;
 	}
 	
 	public static String getLanguage() {
