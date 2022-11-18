@@ -18,7 +18,7 @@ public class RoleRepositoryImpl implements RoleRepositoryExtend {
 	public List<Role> findByUserId(Long userId) {
 		StringBuilder sql = new StringBuilder(1);
 
-		sql.append("SELECT e FROM Role e INNER JOIN UserRole ur ON e.roleId = ur.roleId WHERE ur.userId = :userId");
+		sql.append("SELECT e FROM Role e INNER JOIN UserRole ur ON e.id = ur.roleId WHERE ur.userId = :userId");
 
 		Query query = this.entityManager.createQuery(sql.toString(), Role.class);
 
