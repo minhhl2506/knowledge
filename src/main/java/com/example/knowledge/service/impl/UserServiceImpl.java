@@ -88,8 +88,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			
 			privileges.addAll(pves);
 		});
-		
-		System.out.println(privileges);
 
 		List<GrantedAuthority> grantedAuthorities = privileges.stream()
 				.map(privilege -> new SimpleGrantedAuthority(privilege.getPrivilegeName())).collect(Collectors.toList());

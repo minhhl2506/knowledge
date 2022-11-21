@@ -53,7 +53,7 @@ public class CarController {
 	} 
 	
 	@GetMapping("/locale")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	public String locale() {
 		return this.carService.getMessage(); 
 	}

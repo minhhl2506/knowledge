@@ -175,10 +175,17 @@
 		</sql>
 	</changeSet>
 	
-		<changeSet author="MinhHL" id="s-2022-07-04-01-24">
+	<changeSet author="MinhHL" id="s-2022-07-04-01-24">
 		<sql>
 			ALTER TABLE _role_privilege
 			ADD PRIMARY KEY (role_id,privilege_id);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-25">
+		<sql>
+			ALTER TABLE _inbound_req_log
+			DROP COLUMN response_data
 		</sql>
 	</changeSet>
 	
