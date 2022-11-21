@@ -25,6 +25,8 @@ public enum MessageCode {
 	
 	MSG1007(LabelKey.USER_DOESNT_EXIST),
 	
+	MSG1008(LabelKey.ERROR_USERNAME_OR_PASSWORD_INCORRECT)
+	
 	;
 	
 	private String key;

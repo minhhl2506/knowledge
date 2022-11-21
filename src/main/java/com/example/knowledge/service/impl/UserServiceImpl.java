@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -98,7 +99,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			User user = this.userRepository.findByUsername(loginRequest.getUsername());
 
 			if (Validator.isNull(user)) {
-				throw new BadRequestAlertException(MessageCode.MSG1007);
+				throw new BadRequestAlertException(MessageCode.MSG1008);
 			}
 
 			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,
@@ -106,7 +107,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 			Authentication authentication = this.authenticationManagerBuilder.getObject()
 					.authenticate(authenticationToken);
-//			
+		
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
 			TokenResponse tokenResponse = this.tokenProvider.createToken(username);
@@ -114,9 +115,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			return new ResponseEntity<>(tokenResponse, HttpStatus.OK);
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
+			if (BadCredentialsException.class.isAssignableFrom(e.getClass())) {     	
+            	throw new BadRequestAlertException(MessageCode.MSG1008);
+            }
+			
+			throw e;
 		}
 	}
 
