@@ -156,4 +156,31 @@
 			ADD PRIMARY KEY (user_id,role_id);
 		</sql>
 	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-22">
+		<sql>
+			CREATE TABLE _privilege (
+			id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+			privilege_name VARCHAR(50) not null
+			);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-23">
+		<sql>
+			CREATE TABLE _role_privilege (
+			role_id BIGINT,
+			privilege_id BIGINT
+			);
+		</sql>
+	</changeSet>
+	
+		<changeSet author="MinhHL" id="s-2022-07-04-01-24">
+		<sql>
+			ALTER TABLE _role_privilege
+			ADD PRIMARY KEY (role_id,privilege_id);
+		</sql>
+	</changeSet>
+	
+	
 </databaseChangeLog>

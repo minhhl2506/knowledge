@@ -66,5 +66,33 @@
 			VALUES(2, 'ROLE_ADMIN');
 		</sql>
 	</changeSet>
+	
+	<changeSet author="MinhHL" id="m-2022-08-02-01-09">
+		<sql>
+			INSERT INTO _privilege
+			VALUES(1, 'CAR_READ');
+		</sql>
+	</changeSet>
+	
+	<changeSet author="MinhHL" id="m-2022-08-02-01-10">
+		<sql>
+			INSERT INTO _privilege
+			VALUES(2, 'CAR_WRITE');
+		</sql>
+	</changeSet>
+	
+	<changeSet author="MinhHL" id="m-2022-08-02-01-11">
+		<sql>
+			INSERT INTO _role_privilege
+			VALUES(2, 1);
+		</sql>
+	</changeSet>
+	
+	<changeSet author="MinhHL" id="m-2022-08-02-01-12">
+		<sql>
+			INSERT INTO _role_privilege
+			VALUES(2, 2);
+		</sql>
+	</changeSet>
 
 </databaseChangeLog>

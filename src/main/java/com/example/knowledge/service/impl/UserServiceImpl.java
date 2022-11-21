@@ -2,6 +2,7 @@ package com.example.knowledge.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,8 +24,10 @@ import org.springframework.stereotype.Service;
 import com.example.knowledge.advice.BadRequestAlertException;
 import com.example.knowledge.jwt.JWTTokenProvider;
 import com.example.knowledge.message.MessageCode;
+import com.example.knowledge.model.Privilege;
 import com.example.knowledge.model.Role;
 import com.example.knowledge.model.User;
+import com.example.knowledge.repository.PrivilegeRepository;
 import com.example.knowledge.repository.RoleRepository;
 import com.example.knowledge.repository.UserRepository;
 import com.example.knowledge.request.LoginRequest;
@@ -47,6 +50,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	private RoleRepository roleRepository;
 	
 	@Autowired
+	private PrivilegeRepository privilegeRepository;
+	
+	@Autowired
 	private AuthenticationManagerBuilder authenticationManagerBuilder;
 
 	@Override
@@ -65,18 +71,32 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	private com.example.knowledge.security.UserPrincipal createSpringSecurityUser(String username, User user) {
 
 		List<Role> roles = this.roleRepository.findByUserId(user.getId());
+		
+		List<String> roleNames = new ArrayList<>();
+		
+        List<Privilege> privileges = new ArrayList<>();
 
 		// set list of roles into user
 		user.setRoles(roles);
+		
+		roles.forEach(role -> {
+			roleNames.add(role.getRoleName());
+			
+			List<Privilege> pves = this.privilegeRepository.findByRoleId(role.getId());
+			
+			role.setPrivileges(pves);
+			
+			privileges.addAll(pves);
+		});
+		
+		System.out.println(privileges);
 
-		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-
-		for (Role role : roles) {
-			grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
-		}
-
-		return new com.example.knowledge.security.UserPrincipal(user, grantedAuthorities);
-
+		List<GrantedAuthority> grantedAuthorities = privileges.stream()
+				.map(privilege -> new SimpleGrantedAuthority(privilege.getPrivilegeName())).collect(Collectors.toList());
+					
+			roleNames.stream().forEach(roleName -> grantedAuthorities.add(new SimpleGrantedAuthority(roleName)));
+			
+			return new com.example.knowledge.security.UserPrincipal(user, grantedAuthorities);
 	}
 
 	@Override
