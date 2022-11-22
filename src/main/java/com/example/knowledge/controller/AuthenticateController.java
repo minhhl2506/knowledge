@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.knowledge.annotation.InboundRequestLog;
-import com.example.knowledge.jwt.JWTTokenProvider;
-import com.example.knowledge.repository.UserRepository;
 import com.example.knowledge.request.LoginRequest;
 import com.example.knowledge.response.TokenResponse;
 import com.example.knowledge.service.UserService;
@@ -24,14 +22,10 @@ public class AuthenticateController {
 	
 	private final UserService userService;
 	
-	private final UserRepository userRepository;
-	
-	private final JWTTokenProvider tokenProvider;
-	
 	@InboundRequestLog
 	@PostMapping("/login")
 	public ResponseEntity<TokenResponse> authorize(HttpServletRequest request, @RequestBody LoginRequest loginRequest)
-			throws Exception {
+			throws Exception {		
 		return this.userService.authorize(request, loginRequest);
 	}
 	

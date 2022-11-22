@@ -5,6 +5,7 @@ import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
+import javax.persistence.Lob;
 import javax.persistence.MappedSuperclass;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -29,11 +30,9 @@ public abstract class RequestLogEntity implements Serializable {
 	@Column(name = "method", length = 255)
 	private String method;
 	
+	@Lob
 	@Column(name = "request_data", length = 255)
 	private String requestData;
-	
-	@Column(name = "response_data", length = 5000)
-	private String responseData;
 	
 	@Column(name = "request_time")
 	private Instant requestTime;

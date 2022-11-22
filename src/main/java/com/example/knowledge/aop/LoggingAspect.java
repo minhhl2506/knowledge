@@ -1,5 +1,6 @@
 package com.example.knowledge.aop;
 
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -28,14 +30,15 @@ public class LoggingAspect {
 
 	private final InboundReqLogService inboundReqLogService;
 
-	private final Gson gson; 
+	private final Gson gson;
 
 	@Pointcut("execution(@com.example.knowledge.annotation.*RequestLog * *(..))")
 	public void requestLogPointcut() {
 	}
 
 	@Around("@annotation(inboundRequestLog)")
-	public Object saveInboundLog(final ProceedingJoinPoint joinPoint, InboundRequestLog inboundRequestLog) throws Throwable {
+	public Object saveInboundLog(final ProceedingJoinPoint joinPoint, InboundRequestLog inboundRequestLog)
+			throws Throwable {
 
 		log.info("save inbound req log is called!");
 
@@ -44,19 +47,17 @@ public class LoggingAspect {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
 				.getRequest();
 
+		byte[] requestBody = StreamUtils.copyToByteArray(request.getInputStream());
+
 		reqLog.setRequestUri(request.getRequestURI());
 
 		reqLog.setMethod(request.getMethod());
-		
+
 		reqLog.setRequestTime(Instant.now());
 
-//		reqLog.setRequestData(IOUtils.toString(request.getReader()));
-		
+		reqLog.setRequestData(new String(requestBody, StandardCharsets.UTF_8));
+
 		reqLog.setServiceName(joinPoint.getSignature().getName());
-
-//		System.out.println(gson.toJson(joinPoint.getArgs()));
-
-//		reqLog.setResponseData(mapper.writeValueAsString(joinPoint.proceed()));
 
 		this.inboundReqLogService.save(reqLog);
 
