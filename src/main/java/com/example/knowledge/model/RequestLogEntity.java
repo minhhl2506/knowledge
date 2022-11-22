@@ -31,8 +31,12 @@ public abstract class RequestLogEntity implements Serializable {
 	private String method;
 	
 	@Lob
-	@Column(name = "request_data", length = 255)
+	@Column(name = "request_data", length = 5000)
 	private String requestData;
+	
+	@Lob
+	@Column(name = "response_data", length = 5000)
+	private String responseData;
 	
 	@Column(name = "request_time")
 	private Instant requestTime;

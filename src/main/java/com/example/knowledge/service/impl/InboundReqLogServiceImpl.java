@@ -21,5 +21,10 @@ public class InboundReqLogServiceImpl implements InboundReqLogService {
 	public InboundReqLog save(InboundReqLog reqLog) {
 		return inboundReqLogRepository.save(reqLog);
 	}
+	
+	@Override
+	public InboundReqLog findNewestRecord() {
+		return this.inboundReqLogRepository.findTop1ByOrderByIdDesc();
+	}
 
 }

@@ -5,7 +5,9 @@ import java.time.Instant;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -62,6 +64,42 @@ public class LoggingAspect {
 		this.inboundReqLogService.save(reqLog);
 
 		return joinPoint.proceed();
+	}
+	
+	@AfterReturning(pointcut = "requestLogPointcut()",
+			returning = "returnValue")
+	public void afterRequestReturing(final JoinPoint joinPoint, Object returnValue) {
+
+		InboundReqLog reqLog = this.inboundReqLogService.findNewestRecord();
+		
+		reqLog.setResponseData(this.gson.toJson(returnValue));
+		
+		this.inboundReqLogService.save(reqLog);
+		
+//		System.out.println(returnValue);
+
+//		if (reqLog == null) {
+//			_log.warn("afterRequestReturing: nothing to check, reqLog is null");
+//
+//			return;
+//		}
+//
+//		reqLog.setResponseTime(Instant.now());
+//		reqLog.setHttpStatus(Status.OK.getStatusCode());
+//		reqLog.setResponseData(
+//				StringUtil.substring(this.gson.toJson(returnValue), 0, this.validation.getSuperTextMaxLength()));
+//		reqLog.setDuration(CalendarUtil.getDurationInMillis(reqLog.getRequestTime(), reqLog.getResponseTime()));
+//
+//		if (ConsumerResponse.class.isAssignableFrom(returnValue.getClass())) {
+//			ConsumerResponse returnRes = (ConsumerResponse) returnValue;
+//
+//			reqLog.setErrorCode(returnRes.getErrorCode());
+//			reqLog.setErrorDescription(returnRes.getErrorDesccription());
+//			reqLog.setErrorDetail(returnRes.getErrorDetail());
+//		}
+//
+//		// save request log
+//		this.saveRequestLog(reqLog);
 	}
 
 }

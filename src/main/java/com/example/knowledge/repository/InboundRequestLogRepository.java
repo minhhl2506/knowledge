@@ -7,5 +7,5 @@ import com.example.knowledge.model.InboundReqLog;
 
 @Repository
 public interface InboundRequestLogRepository extends JpaRepository<InboundReqLog, Long> {
-
+	InboundReqLog findTop1ByOrderByIdDesc();
 }
