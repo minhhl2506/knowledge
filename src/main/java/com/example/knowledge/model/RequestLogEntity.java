@@ -43,4 +43,7 @@ public abstract class RequestLogEntity implements Serializable {
 	
 	@Column(name = "service_name", length = 500)
 	private String serviceName;
+	
+	@Column(name = "error_description", length = 5000)
+	private String errorDescription;
 }

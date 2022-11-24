@@ -204,5 +204,12 @@
 		</sql>
 	</changeSet>
 	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-28">
+		<sql>
+			ALTER TABLE _inbound_req_log
+			ADD error_description VARCHAR(5000);
+		</sql>
+	</changeSet>
+	
 	
 </databaseChangeLog>
