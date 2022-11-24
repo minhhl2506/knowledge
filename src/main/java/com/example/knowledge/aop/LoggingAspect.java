@@ -19,6 +19,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.example.knowledge.annotation.InboundRequestLog;
 import com.example.knowledge.model.InboundReqLog;
 import com.example.knowledge.service.InboundReqLogService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,8 @@ public class LoggingAspect {
 	private final InboundReqLogService inboundReqLogService;
 
 	private final Gson gson;
+
+	private final ObjectMapper objectMapper;
 
 	@Pointcut("execution(@com.example.knowledge.annotation.*RequestLog * *(..))")
 	public void requestLogPointcut() {
@@ -65,41 +69,15 @@ public class LoggingAspect {
 
 		return joinPoint.proceed();
 	}
-	
-	@AfterReturning(pointcut = "requestLogPointcut()",
-			returning = "returnValue")
-	public void afterRequestReturing(final JoinPoint joinPoint, Object returnValue) {
+
+	@AfterReturning(pointcut = "requestLogPointcut()", returning = "returnValue")
+	public void afterRequestReturing(final JoinPoint joinPoint, Object returnValue) throws JsonProcessingException {
 
 		InboundReqLog reqLog = this.inboundReqLogService.findNewestRecord();
-		
-		reqLog.setResponseData(this.gson.toJson(returnValue));
-		
-		this.inboundReqLogService.save(reqLog);
-		
-//		System.out.println(returnValue);
 
-//		if (reqLog == null) {
-//			_log.warn("afterRequestReturing: nothing to check, reqLog is null");
-//
-//			return;
-//		}
-//
-//		reqLog.setResponseTime(Instant.now());
-//		reqLog.setHttpStatus(Status.OK.getStatusCode());
-//		reqLog.setResponseData(
-//				StringUtil.substring(this.gson.toJson(returnValue), 0, this.validation.getSuperTextMaxLength()));
-//		reqLog.setDuration(CalendarUtil.getDurationInMillis(reqLog.getRequestTime(), reqLog.getResponseTime()));
-//
-//		if (ConsumerResponse.class.isAssignableFrom(returnValue.getClass())) {
-//			ConsumerResponse returnRes = (ConsumerResponse) returnValue;
-//
-//			reqLog.setErrorCode(returnRes.getErrorCode());
-//			reqLog.setErrorDescription(returnRes.getErrorDesccription());
-//			reqLog.setErrorDetail(returnRes.getErrorDetail());
-//		}
-//
-//		// save request log
-//		this.saveRequestLog(reqLog);
+		reqLog.setResponseData(this.gson.toJson(this.objectMapper.writeValueAsString(returnValue)));
+
+		this.inboundReqLogService.save(reqLog);
 	}
 
 }
