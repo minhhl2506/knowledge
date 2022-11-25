@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.zalando.problem.AbstractThrowableProblem;
 
 import com.example.knowledge.annotation.InboundRequestLog;
 import com.example.knowledge.model.InboundReqLog;
@@ -82,15 +80,14 @@ public class LoggingAspect {
 		this.inboundReqLogService.save(reqLog);
 	}
 
-	@AfterThrowing(value = "requestLogPointcut()", throwing = "ex")
-	public <T extends Exception> void afterRequestThrowing(JoinPoint joinPoint, T ex) {
-		System.out.println(ex.getMessage());
-
-//		InboundReqLog reqLog = this.inboundReqLogService.findNewestRecord();
+//	@AfterThrowing(value = "requestLogPointcut()", throwing = "ex")
+//	public <T extends Exception> void afterRequestThrowing(JoinPoint joinPoint, T ex) {
 //
-//		reqLog.setErrorDescription(ex.getMessage());
-//
-//		this.inboundReqLogService.save(reqLog);
-	}
+////		InboundReqLog reqLog = this.inboundReqLogService.findNewestRecord();
+////
+////		reqLog.setErrorDescription(ex.getMessage());
+////
+////		this.inboundReqLogService.save(reqLog);
+//	}
 
 }

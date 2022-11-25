@@ -20,4 +20,8 @@ public interface CarService {
 
 	CarDTO update(CarDTO dto);
 
+	String encrypt() throws Exception;
+
+	String decrypt(String str) throws Exception;
+
 }

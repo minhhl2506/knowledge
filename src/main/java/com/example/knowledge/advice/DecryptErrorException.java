@@ -3,6 +3,9 @@ package com.example.knowledge.advice;
 import com.example.knowledge.label.LabelKey;
 import com.example.knowledge.label.Labels;
 
+import lombok.Getter;
+
+@Getter
 public class DecryptErrorException extends RuntimeException {
 
     /** The Constant serialVersionUID */

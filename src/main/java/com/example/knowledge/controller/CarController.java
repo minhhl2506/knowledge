@@ -52,6 +52,16 @@ public class CarController {
 		return ResponseEntity.ok(this.carService.detail(id));
 	} 
 	
+	@GetMapping("/encrypt")
+	public String encrypt() throws Exception {
+		return this.carService.encrypt();
+	} 
+	
+	@GetMapping("/decrypt")
+	public String decrypt(@RequestParam(value = "str", required = false) String str) throws Exception {
+		return this.carService.decrypt(str);
+	} 
+	
 	@GetMapping("/locale")
 	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	public String locale() {

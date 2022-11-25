@@ -54,6 +54,16 @@ public class CarServiceImpl implements CarService {
 
 		return new PageImpl<>(this.carMapper.toDto(results), pageable, this.carRepository.count(keyword));
 	}
+	
+	@Override
+	public String encrypt() throws Exception {
+		return this.rsaProvider.encrypt("minhmomi2000");
+	}
+	
+	@Override
+	public String decrypt(String str) throws Exception {
+		return this.rsaProvider.getPrivateKey().toString();
+	}
 
 	@Override
 	public String getMessage() {

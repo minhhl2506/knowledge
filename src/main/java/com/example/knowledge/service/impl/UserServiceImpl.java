@@ -22,6 +22,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.knowledge.advice.BadRequestAlertException;
+import com.example.knowledge.advice.DecryptErrorException;
+import com.example.knowledge.configuration.RsaProvider;
 import com.example.knowledge.jwt.JWTTokenProvider;
 import com.example.knowledge.message.MessageCode;
 import com.example.knowledge.model.Privilege;
@@ -41,7 +43,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Autowired
 	private UserRepository userRepository;
 
-//	private final RsaProvider rsaProvider;
+	@Autowired
+	private RsaProvider rsaProvider;
 
 	@Autowired
 	private JWTTokenProvider tokenProvider;
@@ -99,8 +102,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public ResponseEntity<TokenResponse> authorize(HttpServletRequest request, LoginRequest loginRequest) {
-
-//		return null;
 		String username = loginRequest.getUsername();
 		String password = loginRequest.getPassword();
 
@@ -115,6 +116,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			}
 
 			User user = this.userRepository.findByUsername(loginRequest.getUsername());
+			
+			password = this.rsaProvider.decrypt(password);
 
 			if (Validator.isNull(user)) {
 				throw new BadRequestAlertException(MessageCode.MSG1008);
@@ -135,6 +138,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		} catch (Exception e) {
 			if (BadCredentialsException.class.isAssignableFrom(e.getClass())) {     	
             	throw new BadRequestAlertException(MessageCode.MSG1008);
+            }
+			
+			if (DecryptErrorException.class.isAssignableFrom(e.getClass())) {     	
+            	throw new DecryptErrorException();
             }
 			
 			throw e;

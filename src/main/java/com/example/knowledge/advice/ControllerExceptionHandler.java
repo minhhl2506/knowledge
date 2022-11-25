@@ -32,12 +32,11 @@ public class ControllerExceptionHandler {
 	}
 
 	@ExceptionHandler(value = DecryptErrorException.class)
-	public ResponseEntity<org.zalando.problem.Problem> handleDecryptErrorException(DecryptErrorException ex,
+	public ResponseEntity<ErrorMessage> handleDecryptErrorException(DecryptErrorException ex,
 			WebRequest webRequest) {
-		Problem problem = Problem.builder().withStatus(Status.BAD_REQUEST)
-				.with(ApiConstants.ErrorKey.MESSAGE, Labels.getLabels(LabelKey.ERROR_CANNOT_DECRYPT_DATA)).build();
-
-		return new ResponseEntity<Problem>(problem, HttpStatus.BAD_REQUEST);
+		ErrorMessage errorMessage = new ErrorMessage(HttpStatus.BAD_REQUEST.value(), new Date(),
+				Labels.getLabels(LabelKey.ERROR_CANNOT_DECRYPT_DATA));
+		return new ResponseEntity<ErrorMessage>(errorMessage, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(value = MethodArgumentNotValidException.class)
