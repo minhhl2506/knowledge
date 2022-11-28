@@ -11,9 +11,9 @@ server:
       force: true
 spring:
   datasource:
-    username: 'root'
-    password: 'minhmomi2000'
-    url: 'jdbc:mysql://localhost:3306/my_portal'
+    username: ENC(3nR++9G/RAPIaqtG7PfnOnr306+w0SCy)
+    password: ENC(ere/u4lN/PabfbV66AZ7CBW1RlQG476yHSTA2rS+X30=)
+    url: ENC(XjqDGvO0BWg6aI7DEXnvOp5QpVnXGvcVqkLNdvLviXgDuEUUSOyELf4sMjE0FR8PbVAT+bN4jMk=)
   jpa:
     show-sql: false
     hibernate:
@@ -41,8 +41,8 @@ scheduling:
 
 jasypt:
   encryptor:
-    pass: 'minhmomi2000'
-    algorithm: 'PBEWITHHMACSHA512ANDAES_256'
+    password: 'YWF9tWp3MYI6lg2imQ/UokKYoIU1Vy/7sqlr+7CToYlGFb7iESOJqKeNfSlHm/qVxVAFeIiB5oMg/f27btXj517Y43FYhiQEWyas540IknRePl1YG2a53FwYQ4UQzQpZ/NM0QHaIJus7huJF+jM6u2v5sn5nwNiyjx7ZWD2AMyZx5hkPjcTT/hDEFC+SrnHp8F1goFLobUYmila8d0mw51un2iNxV+3Q9f8eckBBl7S3eOI1ndQNFm80Puw7QtEJes0JakaFTWkCXpfVLVqW7qyKcy6uWX25fyqqz+tk8Amkr3G59GXm5Cs+HA2DEorReNyMEJ8GNzlHABEIKHR/iw=='
+    algorithm: 'PBEWithMD5AndTripleDES'
     pool-size: 4
     key-obtention-iterations: 1500
     provider-name: 'SunJCE'

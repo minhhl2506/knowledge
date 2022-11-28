@@ -1,19 +1,25 @@
 package com.example.knowledge.configuration;
 
+import java.security.NoSuchAlgorithmException;
+
 import org.jasypt.encryption.pbe.PBEStringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
+import org.jasypt.util.text.AES256TextEncryptor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @Component
+@RequiredArgsConstructor
 @ConfigurationProperties(prefix = "jasypt.encryptor")
 public class JasyptConfiguration {
 
-	private String pass;
+	private String password;
     
     private String algorithm;
     
@@ -38,7 +44,7 @@ public class JasyptConfiguration {
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();
         
         config.setPoolSize(this.poolSize);
-        config.setPassword(this.pass);
+        config.setPassword(this.rsaProvider.decrypt(this.password));
         config.setAlgorithm(this.algorithm);
         config.setIvGeneratorClassName(this.ivGeneratorClassname);
         config.setSaltGeneratorClassName(this.saltGeneratorClassname);
@@ -49,4 +55,5 @@ public class JasyptConfiguration {
         
         return encryptor;
     }
+  
 }
