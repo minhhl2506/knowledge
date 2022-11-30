@@ -12,12 +12,13 @@ import org.apache.lucene.analysis.core.WhitespaceTokenizerFactory;
 import org.apache.lucene.analysis.miscellaneous.ASCIIFoldingFilterFactory;
 import org.apache.lucene.analysis.miscellaneous.TrimFilterFactory;
 import org.apache.lucene.analysis.ngram.EdgeNGramFilterFactory;
+import org.hibernate.annotations.TypeDef;
 import org.hibernate.search.annotations.AnalyzerDef;
 import org.hibernate.search.annotations.NormalizerDef;
 import org.hibernate.search.annotations.Parameter;
-import org.hibernate.search.annotations.SortableField;
 import org.hibernate.search.annotations.TokenFilterDef;
 import org.hibernate.search.annotations.TokenizerDef;
+import org.jasypt.hibernate5.type.EncryptedStringType;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -28,26 +29,27 @@ import com.example.knowledge.cache.util.Constants;
 
 import lombok.Data;
 
-@AnalyzerDef(name = Constants.AnalyzerDefName.EDGE_NGRAM, 
-tokenizer = @TokenizerDef(factory = WhitespaceTokenizerFactory.class), filters = {
-@TokenFilterDef(factory = ASCIIFoldingFilterFactory.class),
-@TokenFilterDef(factory = LowerCaseFilterFactory.class), @TokenFilterDef(factory = TrimFilterFactory.class),
-@TokenFilterDef(factory = EdgeNGramFilterFactory.class, // Generate prefix tokens
-	params = { @Parameter(name = Constants.AnalyzerDefName.MIN_GRAM_SIZE, value = "2"),
-			@Parameter(name = Constants.AnalyzerDefName.MAX_GRAM_SIZE, value = "15") }) })
-@AnalyzerDef(name = Constants.AnalyzerDefName.EDGE_NGRAM_QUERY, 
-tokenizer = @TokenizerDef(factory = WhitespaceTokenizerFactory.class), filters = {
-@TokenFilterDef(factory = ASCIIFoldingFilterFactory.class), // Replace accented characeters by their simpler
-														// counterpart (è => e, etc.)
-@TokenFilterDef(factory = LowerCaseFilterFactory.class) // Lowercase all characters
+@AnalyzerDef(name = Constants.AnalyzerDefName.EDGE_NGRAM, tokenizer = @TokenizerDef(factory = WhitespaceTokenizerFactory.class), filters = {
+		@TokenFilterDef(factory = ASCIIFoldingFilterFactory.class),
+		@TokenFilterDef(factory = LowerCaseFilterFactory.class), @TokenFilterDef(factory = TrimFilterFactory.class),
+		@TokenFilterDef(factory = EdgeNGramFilterFactory.class, // Generate prefix tokens
+				params = { @Parameter(name = Constants.AnalyzerDefName.MIN_GRAM_SIZE, value = "2"),
+						@Parameter(name = Constants.AnalyzerDefName.MAX_GRAM_SIZE, value = "15") }) })
+@AnalyzerDef(name = Constants.AnalyzerDefName.EDGE_NGRAM_QUERY, tokenizer = @TokenizerDef(factory = WhitespaceTokenizerFactory.class), filters = {
+		@TokenFilterDef(factory = ASCIIFoldingFilterFactory.class), // Replace accented characeters by their simpler
+		// counterpart (è => e, etc.)
+		@TokenFilterDef(factory = LowerCaseFilterFactory.class) // Lowercase all characters
 })
 
-@NormalizerDef(name = Constants.AnalyzerDefName.LOWERCASE,
-filters = {
-    @TokenFilterDef(factory = ASCIIFoldingFilterFactory.class),
-    @TokenFilterDef(factory = LowerCaseFilterFactory.class),
-    @TokenFilterDef(factory = TrimFilterFactory.class)
-    })
+@NormalizerDef(name = Constants.AnalyzerDefName.LOWERCASE, filters = {
+		@TokenFilterDef(factory = ASCIIFoldingFilterFactory.class),
+		@TokenFilterDef(factory = LowerCaseFilterFactory.class), @TokenFilterDef(factory = TrimFilterFactory.class) })
+
+//dinh nghia encryptor cua jasypt
+@TypeDef(name = "encryptedString", typeClass = EncryptedStringType.class, 
+		parameters = {
+		@org.hibernate.annotations.Parameter
+		(name = "encryptorRegisteredName", value = "hibernateEncryptor") })
 
 @Data
 @MappedSuperclass
@@ -58,7 +60,7 @@ public abstract class AbstractEntity implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 4737229646610526219L;
-	
+
 	@CreatedBy
 	@Column(name = "created_by", length = 255)
 	private String createdBy;

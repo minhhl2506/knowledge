@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.Field;
@@ -58,6 +59,7 @@ public class Car extends AbstractEntity implements Serializable {
 	//edgeNGram là tokenizer hữu ích trong việc nhập và trả về kết quả ngay lập tức
 	//store.yes phục vụ cho việc projection
 	@Column(name = "name", length = 255)
+	@Type(type = "encryptedString")
 	private String name;
 
 	@Field

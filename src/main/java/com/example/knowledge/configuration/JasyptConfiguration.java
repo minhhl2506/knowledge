@@ -1,11 +1,9 @@
 package com.example.knowledge.configuration;
 
-import java.security.NoSuchAlgorithmException;
-
 import org.jasypt.encryption.pbe.PBEStringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
-import org.jasypt.util.text.AES256TextEncryptor;
+import org.jasypt.hibernate5.encryptor.HibernatePBEEncryptorRegistry;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -54,6 +52,16 @@ public class JasyptConfiguration {
         encryptor.setConfig(config);
         
         return encryptor;
+    }
+    
+    //dang ki jasypt voi hibernate de tu dong ma hoa/giai ma
+    @Bean("hibernatePBEEncryptorRegistry")
+    public HibernatePBEEncryptorRegistry registry() throws Exception {
+        HibernatePBEEncryptorRegistry registry = HibernatePBEEncryptorRegistry.getInstance();
+
+        registry.registerPBEStringEncryptor("hibernateEncryptor", stringEncryptor());
+
+        return registry;
     }
   
 }
