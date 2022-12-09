@@ -117,20 +117,24 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 			User user = this.userRepository.findByUsername(loginRequest.getUsername());
 			
-			password = this.rsaProvider.decrypt(password);
-
 			if (Validator.isNull(user)) {
 				throw new BadRequestAlertException(MessageCode.MSG1008);
 			}
+			
+			//giai ma password
+			password = this.rsaProvider.decrypt(password);
 
+			//spring check password
 			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,
 					password);
 
 			Authentication authentication = this.authenticationManagerBuilder.getObject()
 					.authenticate(authenticationToken);
 		
+			//neu username/password dung thi set vao security context 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
+            //generate token
 			TokenResponse tokenResponse = this.tokenProvider.createToken(username);
 
 			return new ResponseEntity<>(tokenResponse, HttpStatus.OK);

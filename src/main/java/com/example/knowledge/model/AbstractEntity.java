@@ -71,7 +71,7 @@ public abstract class AbstractEntity implements Serializable {
 
 	@LastModifiedBy
 	@Column(name = "last_modified_by", length = 255)
-	private String clastModifiedBy;
+	private String lastModifiedBy;
 
 	@LastModifiedDate
 	@Column(name = "last_modified_date")
