@@ -2,6 +2,8 @@ package com.example.knowledge.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	private static final String[] PUBLIC_URLS = {"/**/authenticate/**"};
@@ -34,6 +37,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+	
+	@Bean
+	public AuditorAware<String> auditorAware() {
+		return new SpringSecurityAuditorAware();
+	}
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {

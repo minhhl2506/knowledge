@@ -9,7 +9,6 @@ import javax.validation.constraints.Size;
 
 import com.example.knowledge.label.LabelKey;
 import com.example.knowledge.util.ValidateConstraint;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL) // Chỉ cho những thuộc tính k có giá trị default vào response
+//@JsonInclude(JsonInclude.Include.NON_NULL) // Chỉ cho những thuộc tính k có giá trị default vào response
 public class CarDTO implements Serializable {
 
 	/** The Constant serialVersionUID */
@@ -34,8 +33,12 @@ public class CarDTO implements Serializable {
 	private Integer carPrice;
 
 	private Integer status;
+	
+	private String createdBy;
 
 	private Instant createdDate;
+	
+	private String lastModifiedBy;
 
 	private Instant lastModifiedDate;
 

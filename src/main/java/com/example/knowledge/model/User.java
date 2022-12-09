@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements Serializable {
+public class User extends AbstractEntity implements Serializable {
 
 	/**
 	 * 

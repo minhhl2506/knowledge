@@ -211,5 +211,11 @@
 		</sql>
 	</changeSet>
 	
+	<changeSet author="MinhHL" id="s-2022-07-04-01-29">
+		<sql>
+			TRUNCATE TABLE _car;
+		</sql>
+	</changeSet>
+	
 	
 </databaseChangeLog>

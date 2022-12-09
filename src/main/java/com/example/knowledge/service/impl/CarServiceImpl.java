@@ -22,6 +22,7 @@ import com.example.knowledge.model.Car;
 import com.example.knowledge.model.ResultSet;
 import com.example.knowledge.model.dto.CarDTO;
 import com.example.knowledge.repository.CarRepository;
+import com.example.knowledge.repository.UserRepository;
 import com.example.knowledge.service.CarService;
 import com.example.knowledge.service.mapper.CarMapper;
 import com.example.knowledge.util.Validator;
@@ -43,6 +44,8 @@ public class CarServiceImpl implements CarService {
 	private final CarMapper carMapper;
 
 	private final RsaProvider rsaProvider;
+	
+	private final UserRepository userRepository;
 
 //	private final ValidationProperties validationProperties;
 
@@ -91,6 +94,13 @@ public class CarServiceImpl implements CarService {
 
 	@Override
 	public Page<CarDTO> searchByKeyword(String keyword) {
+		
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		
+//		User user = this.userRepository.findByUsername(auth.getName());
+//		
+//		System.out.println(user.getUsername());
+		
 		Pageable pageable = PageRequest.of(0, 100);
 
 		ResultSet<Car> results = this.carRepository.searchByKeyword(keyword, pageable);
