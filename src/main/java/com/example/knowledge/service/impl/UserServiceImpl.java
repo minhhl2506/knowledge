@@ -135,7 +135,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             //generate token
-			TokenResponse tokenResponse = this.tokenProvider.createToken(username);
+			TokenResponse tokenResponse = this.tokenProvider.createAccessToken(username);
 
 			return new ResponseEntity<>(tokenResponse, HttpStatus.OK);
 

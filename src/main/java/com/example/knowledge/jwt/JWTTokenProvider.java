@@ -38,26 +38,34 @@ public class JWTTokenProvider {
 		return Keys.hmacShaKeyFor(keyBytes);
 	}
 
-    public TokenResponse createToken(String username) {
+    public TokenResponse createAccessToken(String username) {
     	
     	Map<String, Object> claims = new HashMap<>();
     	
-    	return generateToken(claims, username);
+    	return generateAccessToken(claims, username);
     }
 
-    public TokenResponse generateToken(Map<String, Object> claims, String username) {
+    public TokenResponse generateAccessToken(Map<String, Object> claims, String username) {
         
     	Date expiration = DateUtils.getDateAfterSecond(new Date(), this.tokenProperties.getToken());
     	
-    	String jwtToken = Jwts.builder()
+    	String accessToken = Jwts.builder()
         				 .setClaims(claims)
         				 .setSubject(username)
                          .setExpiration(expiration)
                          .signWith(getSigningKey()).compact();
+    	
+    	String refreshToken = Jwts.builder()
+				 .setClaims(claims)
+				 .setSubject(username)
+                 .setExpiration(expiration)
+                 .signWith(getSigningKey()).compact();
         
         TokenResponse tokenResponse = TokenResponse.builder()
-        											.token(jwtToken)
-        											.type(SecurityConstants.TokenType.TOKEN)
+        											.accessToken(accessToken)
+        											.type(SecurityConstants.TokenType.ACCESS_TOKEN)
+        											.refreshToken(refreshToken)
+        											.type(SecurityConstants.TokenType.REFRESH_TOKEN)
         											.duration(this.tokenProperties.getToken())
         											.build();
         

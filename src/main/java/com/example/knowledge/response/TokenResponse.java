@@ -2,9 +2,6 @@ package com.example.knowledge.response;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +11,7 @@ import lombok.Setter;
 @Setter
 @Builder
 @AllArgsConstructor
-@JsonInclude(Include.NON_NULL)
+//@JsonInclude(Include.NON_NULL)
 public class TokenResponse implements Serializable {
 	
 	/**
@@ -24,7 +21,9 @@ public class TokenResponse implements Serializable {
 	
 	private String type;
 
-	private String token;
+	private String accessToken;
+	
+	private String refreshToken;
 	
 	private int duration;
 
