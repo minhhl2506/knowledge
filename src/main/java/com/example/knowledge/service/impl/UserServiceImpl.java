@@ -35,6 +35,7 @@ import com.example.knowledge.repository.UserRepository;
 import com.example.knowledge.request.LoginRequest;
 import com.example.knowledge.response.TokenResponse;
 import com.example.knowledge.service.UserService;
+import com.example.knowledge.util.SecurityConstants;
 import com.example.knowledge.util.Validator;
 
 @Service
@@ -133,9 +134,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		
 			//neu username/password dung thi set vao security context 
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            
+            String accessToken = this.tokenProvider.createAccessToken(username);
+            
+            String refreshToken = this.tokenProvider.createRefreshToken(username);
 
             //generate token
-			TokenResponse tokenResponse = this.tokenProvider.createAccessToken(username);
+			TokenResponse tokenResponse = TokenResponse.builder()
+													   .type(SecurityConstants.Header.BEARER)
+													   .accessToken(accessToken)
+													   .refreshToken(refreshToken)
+													   .accessTokenDuration(300)
+													   .build();
 
 			return new ResponseEntity<>(tokenResponse, HttpStatus.OK);
 

@@ -23,8 +23,8 @@ public class TokenResponse implements Serializable {
 
 	private String accessToken;
 	
-	private String refreshToken;
 	
-	private int duration;
+	private int accessTokenDuration;
 
+	private String refreshToken;
 }

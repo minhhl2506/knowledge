@@ -14,5 +14,13 @@ public interface SecurityConstants {
         
         public static final String CSRF_TOKEN = "csrf-token";
     }
+    
+    public interface Header {
+    	public static final String BEARER = "Bearer ";
+    }
+    
+    public interface Cache {
+    	public static final String REFRESH_TOKEN = "refresh-token";
+    }
 	
 }
