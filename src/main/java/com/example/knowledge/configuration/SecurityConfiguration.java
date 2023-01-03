@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.example.knowledge.jwt.JWTAuthenticationFilter;
-import com.example.knowledge.service.impl.UserServiceImpl;
+import com.example.knowledge.service.impl.UserDetailsServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public UserDetailsService userDetailsService() {
-		return new UserServiceImpl();
+		return new UserDetailsServiceImpl();
 	}
 	
 	@Bean
@@ -65,6 +65,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests().antMatchers(PUBLIC_URLS)
                         .permitAll()
+                        .anyRequest()
+                        .authenticated()
                         .and()
                         .authorizeRequests()
                         .and()

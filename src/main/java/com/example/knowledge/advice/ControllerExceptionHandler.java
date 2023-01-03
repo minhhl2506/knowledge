@@ -11,13 +11,10 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
-import org.zalando.problem.Problem;
-import org.zalando.problem.Status;
 
 import com.example.knowledge.exception.ErrorMessage;
 import com.example.knowledge.label.LabelKey;
 import com.example.knowledge.label.Labels;
-import com.example.knowledge.util.ApiConstants;
 
 import io.jsonwebtoken.ExpiredJwtException;
 
@@ -37,6 +34,14 @@ public class ControllerExceptionHandler {
 		ErrorMessage errorMessage = new ErrorMessage(HttpStatus.BAD_REQUEST.value(), new Date(),
 				Labels.getLabels(LabelKey.ERROR_CANNOT_DECRYPT_DATA));
 		return new ResponseEntity<ErrorMessage>(errorMessage, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(value = UnauthorizedException.class)
+	public ResponseEntity<ErrorMessage> handleUnauthorizedException(UnauthorizedException ex,
+			WebRequest webRequest) {
+		ErrorMessage errorMessage = new ErrorMessage(HttpStatus.UNAUTHORIZED.value(), new Date(),
+				Labels.getLabels(LabelKey.ERROR_ACCESS_DENIED_EXCEPTION));
+		return new ResponseEntity<ErrorMessage>(errorMessage, HttpStatus.UNAUTHORIZED);
 	}
 
 	@ExceptionHandler(value = MethodArgumentNotValidException.class)

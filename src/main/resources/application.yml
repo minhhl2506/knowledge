@@ -59,7 +59,7 @@ rsa:
   public-key: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmD9evqQe1hTXdRPEJKEgkTfPGYBk0c6JCY+vLn1m4pIaaDZdJmEWrug7YwRFGfE9TMKk26M3ACGOiu7Uw267Y85/Lb3maD7CplVkhjXVVcQ8aUI4t6/BFI7wLzt7DqAmlJR4FDgTDFQl1W8ZU+QpPyP8S34s9b+yvJZAPin9Pdd23uqNtBY2RFwu+QS27Q5u6IcCLFsb1wgTb3fq/umiQ4MXRzy6jsHoUQ1Z8n305oUWsxsaC6SLCJsFSJh2w6wakScGAF9hmWdGI+PkodILxhi53zM5gWFzusasW4QQJC7tElwhn4iIcJdYF1OIAhV0RQAxjfb5kZ3/1Dm7GxBYMwIDAQAB'
 cache:
   time-to-live:
-    token: 300 #giay
+    token: 60 #giay
 security:
   authentication:
     jwt:

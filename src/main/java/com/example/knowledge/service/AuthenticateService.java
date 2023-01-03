@@ -3,14 +3,11 @@ package com.example.knowledge.service;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.knowledge.request.LoginRequest;
 import com.example.knowledge.response.TokenResponse;
 
-public interface UserService {
-
-	UserDetails loadUserByUsername(String username);
+public interface AuthenticateService {
 
 	/**
 	 * @param request

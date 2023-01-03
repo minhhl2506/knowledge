@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.knowledge.annotation.InboundRequestLog;
 import com.example.knowledge.request.LoginRequest;
 import com.example.knowledge.response.TokenResponse;
-import com.example.knowledge.service.UserService;
+import com.example.knowledge.service.AuthenticateService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/authenticate")
 public class AuthenticateController {
 	
-	private final UserService userService;
+	private final AuthenticateService userService;
 	
 	@InboundRequestLog
 	@PostMapping("/login")
